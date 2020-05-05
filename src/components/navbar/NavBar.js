@@ -7,13 +7,18 @@ import ReporterSignedInLinks from './ReporterSignedInLinks';
 import VoiceSignedInLinks from './VoiceSignedInLinks';
 
 class NavBar extends Component {
+    constructor(props){
+        super(props);
+    }
     
     render() {
         let link = '';
-        let demo = 4;
+        let demo = 1;
         switch (demo) {
             case 1:
-                link = <SignedOutLinks />
+                link = <SignedOutLinks 
+                            handleLoginDisplay={this.props.handleLoginDisplay}
+                        />
                 break;
             case 2:
                 link = <InstitutionSignedInLinks />
@@ -28,7 +33,7 @@ class NavBar extends Component {
                 break;
         }
         return (
-            <header>
+            <header className='nav-header'>
                 <Container>
                     <Navbar className="color-nav" bg='' expand="lg">
                         <Navbar.Brand href="">
