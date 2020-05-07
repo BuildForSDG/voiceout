@@ -1,0 +1,22 @@
+h2, h3 {
+	font-size: 1.5rem;
+}
+h2{
+	font-weight: bold;
+}
+header.home-header{
+	padding-top: 200px !important;
+	padding: 100px;
+	line-height: 100px;
+}
+.report-summary{
+	display: flex;
+  flex-wrap: wrap;
+	justify-content: center;
+	border: 1px solid rgb(172, 171, 171);
+	border-radius: 10px;
+}
+.report-summary > .inside-flex{
+  width: 500px;
+  margin: 10px;
+}
