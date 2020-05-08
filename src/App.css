@@ -14,6 +14,7 @@ body{
   background-color: #fff;
   position: fixed;
   width: 100%;
+  border-bottom: 1px solid #888;
 }
 .color-nav{
   background-color: transparent !important;

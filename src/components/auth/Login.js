@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../style/Login.css';
+import '../../style/Form.css';
 
 export default class Login extends Component {
 	constructor(props){
@@ -26,12 +26,12 @@ export default class Login extends Component {
 			<div>
 				<div id="id01" class="modal">
 					<form onSubmit={this.handleSubmit} class="modal-content animate">
-						<span onClick={this.props.handleLoginDisplay} class="close" title="Close Modal">&times;</span>
 						<div class="contain">
-							<label for="uname">Username</label>
+							<span onClick={this.props.handleLoginDisplay} class="close" title="Close Modal">&times;</span>
+							<label for="email">Email</label>
 							<input
 								type="email"
-								placeholder="Enter Username"
+								placeholder="Enter Email"
 								name="email"
 								onChange={this.handleChange}
 								required
