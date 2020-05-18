@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import ReportsList from '../reports/ReportsList';
 import '../../style/Home.css'
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
 import Login from '../auth/Login';
 import NewReport from '../reporter/NewReport';
+import Loading from './Loading';
 
 
 export default class Home extends Component {
@@ -11,24 +13,39 @@ export default class Home extends Component {
 		super(props);
 
 		this.state = {
-			showAnonymousReportForm: false
+			showAnonymousReportForm: false,
+			loading: false
 		}
 
 	}
-
-
 	componentDidMount(){
-		//make api calls here
+		const data = JSON.parse(localStorage.getItem('response'));
+		if( data ){
+			this.setState({
+				loading: false
+			})
+		}
 	}
-
 	handleShowReportForm = () => {
 		this.setState({
 			showAnonymousReportForm: !this.state.showAnonymousReportForm
 		})
 	}
+	loading = () => {
+		const data = JSON.parse(localStorage.getItem('response'));
+		if( data == undefined){
+			this.setState({
+				loading: true
+			})
+		}
+		console.log('loading......');
+		console.log(this.state.loading);
+	}
 
 	render() {
-		console.log(this.props.handleDisplayState.loginDisplay)
+		console.log(this.state.loading);
+		const data = JSON.parse(localStorage.getItem('response'));
+		if( data && data.user.role == 'user') return <Redirect to='/reporter' />;
 		return (
 			<div className='container'>
 				<header className='home-header text-center'> 
@@ -42,7 +59,12 @@ export default class Home extends Component {
 					<Button onClick={this.handleShowReportForm}>Make a Report</Button>
 				</header>
 				{(this.props.handleDisplayState.loginDisplay) 
-					? <Login handleLoginDisplay={this.props.handleLoginDisplay} />: ''
+					? <Login 
+						loadingClick={this.loading}
+						handleLoginDisplay={this.props.handleLoginDisplay} />: ''
+				}
+				{(this.state.loading) 
+					? <Loading />: ''
 				}
 				{(this.state.showAnonymousReportForm)
 					? <NewReport handleShowReportForm={this.handleShowReportForm} />: ''

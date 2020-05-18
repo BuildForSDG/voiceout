@@ -1,3 +1,4 @@
+import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap'
@@ -13,25 +14,33 @@ class NavBar extends Component {
 		
 	render() {
 		let link = '';
-		let demo = 1;
-		switch (demo) {
-			case 1:
-				link = <SignedOutLinks 
-									handleLoginDisplay={this.props.handleLoginDisplay}
-								/>
-				break;
-			case 2:
-				link = <InstitutionSignedInLinks />
-				break;
-			case 3:
-				link = <ReporterSignedInLinks />
-				break;
-			case 4:
-				link = <VoiceSignedInLinks />
-				break;
-			default:
-				break;
+		if (localStorage.getItem('response') == undefined){
+			link = <SignedOutLinks 
+				handleLoginDisplay={this.props.handleLoginDisplay}
+			/>
 		}
+		if(localStorage.getItem('response') != undefined){
+			let userRole= JSON.parse(localStorage.getItem('response')).user.role;
+			switch (userRole) {
+				case 'institution':
+					link = <InstitutionSignedInLinks 
+						loginDisappear={this.props.loginDisappear}
+					/>
+					break;
+				case 'user':
+					link = <ReporterSignedInLinks
+						loginDisappear={this.props.loginDisappear}
+					/>
+					break;
+				case 'voice':
+					link = <VoiceSignedInLinks
+						loginDisappear={this.props.loginDisappear}
+					/>
+					break;
+				default:
+					break;
+			}
+		}		
 		return (
 			<header className='nav-header'>
 				<Container>
@@ -50,4 +59,10 @@ class NavBar extends Component {
 	}
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+	return{
+			response: state.auth.response
+	}
+}
+
+export default connect(mapStateToProps, null)(NavBar)
