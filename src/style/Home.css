@@ -11,9 +11,9 @@ header.home-header{
 }
 .report-summary{
 	display: flex;
-  flex-wrap: wrap;
-	justify-content: center;
-	border: 1px solid rgb(172, 171, 171);
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	//border: 1px solid rgb(172, 171, 171);
 	border-radius: 10px;
 }
 .report-summary > .inside-flex{
