@@ -6,9 +6,10 @@ import { Button, Navbar, Nav, Container } from 'react-bootstrap';
 import Login from '../auth/Login';
 import NewReport from '../reporter/NewReport';
 import Loading from './Loading';
+import {connect} from 'react-redux';
 
 
-export default class Home extends Component {
+class Home extends Component {
 	constructor(props){
 		super(props);
 
@@ -43,9 +44,19 @@ export default class Home extends Component {
 	}
 
 	render() {
+		const { response } = this.props;
 		console.log(this.state.loading);
 		const data = JSON.parse(localStorage.getItem('response'));
-		if( data && data.user.role == 'user') return <Redirect to='/reporter' />;
+		if(response.user){
+			//const localResponse = JSON.parse(localStorage.getItem('response'));
+			const reporter = response.user.role == 'user';
+			const voice = response.user.role == 'voice';
+			const institution = response.user.role == 'institution';
+			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
+			if (reporter && localStorageNotUndefined) return <Redirect to='/reporter' />
+			if (voice && localStorageNotUndefined) return <Redirect to='/voice' />
+			if (institution && localStorageNotUndefined) return <Redirect to='/institution' />
+		}
 		return (
 			<div className='container'>
 				<header className='home-header text-center'> 
@@ -76,3 +87,11 @@ export default class Home extends Component {
 		)
 	}
 }
+const mapStateToProps = (state) => {
+	//console.log(state);
+	return{
+			response: state.auth.response
+	}
+}
+
+export default connect(mapStateToProps, null)(Home)

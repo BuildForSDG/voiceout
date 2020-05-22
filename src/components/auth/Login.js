@@ -12,9 +12,22 @@ class Login extends Component {
 			password: '',
 			isLoading: false,
 			isValid: false,
-			redirect: false
+			redirect: false,
+			validLogin: true
 		}
 
+	}
+	componentDidMount(){
+		const {response} = this.props;
+		let invalidResponse = response != '' && !response.hasOwnProperty('user');
+		if(invalidResponse)
+		this.setState({
+			validLogin: false
+		});
+		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
+		if(getLocalStorage && !getLocalStorage.hasOwnProperty('user')){
+			localStorage.clear();
+		}
 	}
 
 	handleChange = (e) => {
@@ -39,7 +52,8 @@ class Login extends Component {
 	render() {
 		//console.log(this.state.isLoading)
 		const { response } = this.props;
-		if(response.user){
+		if(response.user && this.state.validLogin){
+			//const localResponse = JSON.parse(localStorage.getItem('response'));
 			const reporter = response.user.role == 'user';
 			const voice = response.user.role == 'voice';
 			const institution = response.user.role == 'institution';
@@ -55,6 +69,11 @@ class Login extends Component {
 		{/*<input type="hidden" name="_token" value={token} />*/}
 						<div class="contain">
 							<span onClick={this.props.handleLoginDisplay} class="close" title="Close Modal">&times;</span>
+							<div className='error-text'>
+								<p className='submit-error text-center'>
+									{(this.state.validLogin) ? '' : 'Invalid Login details'}
+								</p>
+							</div>
 							<label for="email">Email</label>
 							<input
 								type="email"

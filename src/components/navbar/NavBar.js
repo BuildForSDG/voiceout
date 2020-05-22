@@ -14,32 +14,38 @@ class NavBar extends Component {
 		
 	render() {
 		let link = '';
-		if (localStorage.getItem('response') == undefined){
+		let data = JSON.parse(localStorage.getItem('response'));
+		let dataIsAvailable = data && !data.hasOwnProperty('user');
+		if ( data == undefined || dataIsAvailable ){
 			link = <SignedOutLinks 
 				handleLoginDisplay={this.props.handleLoginDisplay}
 			/>
 		}
-		if(localStorage.getItem('response') != undefined){
-			let userRole= JSON.parse(localStorage.getItem('response')).user.role;
-			switch (userRole) {
-				case 'institution':
-					link = <InstitutionSignedInLinks 
-						loginDisappear={this.props.loginDisappear}
-					/>
-					break;
-				case 'user':
-					link = <ReporterSignedInLinks
-						loginDisappear={this.props.loginDisappear}
-					/>
-					break;
-				case 'voice':
-					link = <VoiceSignedInLinks
-						loginDisappear={this.props.loginDisappear}
-					/>
-					break;
-				default:
-					break;
+		if(localStorage.getItem('response') != undefined ){
+			let data = JSON.parse(localStorage.getItem('response'));
+			if(data.user){
+				let userRole= JSON.parse(localStorage.getItem('response')).user.role;
+				switch (userRole) {
+					case 'institution':
+						link = <InstitutionSignedInLinks 
+							loginDisappear={this.props.loginDisappear}
+						/>
+						break;
+					case 'user':
+						link = <ReporterSignedInLinks
+							loginDisappear={this.props.loginDisappear}
+						/>
+						break;
+					case 'voice':
+						link = <VoiceSignedInLinks
+							loginDisappear={this.props.loginDisappear}
+						/>
+						break;
+					default:
+						break;
+				}
 			}
+			
 		}		
 		return (
 			<header className='nav-header'>
