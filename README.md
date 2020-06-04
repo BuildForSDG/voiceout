@@ -20,8 +20,8 @@ This application aim to solve the United Nations Sustainable Development Goal 16
 
 
 ## Authors
-Towoju Johnson (Technical Team Lead) - [johnson-jnr](github.com/johnson-jnr) <br/>
-Adesina Oluwatoyin (Frontend) - [etoyin](github.com/etoyin)
+Towoju Johnson - [johnson-jnr](github.com/johnson-jnr) <br/>
+Adesina Oluwatoyin - [etoyin](github.com/etoyin)
 <br/>
 
 
