@@ -32,7 +32,7 @@ class Login extends Component {
 
 	handleChange = (e) => {
 		this.setState({
-				[e.target.name] : e.target.value
+			[e.target.name] : e.target.value
 		})
 	}
 	
@@ -53,14 +53,8 @@ class Login extends Component {
 		//console.log(this.state.isLoading)
 		const { response } = this.props;
 		if(response.user && this.state.validLogin){
-			//const localResponse = JSON.parse(localStorage.getItem('response'));
-			const reporter = response.user.role == 'user';
-			const voice = response.user.role == 'voice';
-			const institution = response.user.role == 'institution';
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
-			if (reporter && localStorageNotUndefined) return <Redirect to='/reporter' />
-			if (voice && localStorageNotUndefined) return <Redirect to='/voice' />
-			if (institution && localStorageNotUndefined) return <Redirect to='/institution' />
+			if (localStorageNotUndefined) return <Redirect to='/reporter' />
 		}
 		return (
 			<div>

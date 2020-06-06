@@ -13,13 +13,6 @@ export default class ReportsSummary extends Component {
 					/>
 					<figcaption>About the image</figcaption>
 				</figure>
-				<section className='inside-flex'>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-						In ex libero, lacinia sit amet rutrum sit amet, 
-						sodales varius risus. Suspendisse tincidunt 
-						rhoncus gravida. Cras diam libero, ultricie</p>
-				</section>
 			</div>
 		)
 	}

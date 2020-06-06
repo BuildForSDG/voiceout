@@ -9,17 +9,33 @@ header.home-header{
 	padding: 100px;
 	line-height: 100px;
 }
-.report-summary{
+div.checkbox{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	//border: 1px solid rgb(172, 171, 171);
 	border-radius: 10px;
 }
-.report-summary > .inside-flex{
+div.checkbox > form{
   width: 500px;
   margin: 10px;
 }
 .name{
 	color: rgb(30, 97, 240);
+}
+table{
+	width: 100%
+}
+.home_checkbox{
+	width: 100%;
+}
+button.sector_submit {
+  background-color:;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+	width: 200px;
+	
 }
