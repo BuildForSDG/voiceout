@@ -35,7 +35,8 @@ const PostData = (type, userData) => {
 					email,
 					password,
 					first_name,
-					last_name
+					last_name,
+					role: 'user'
 				}),
 				headers: {
 					"Content-Type": "application/json",

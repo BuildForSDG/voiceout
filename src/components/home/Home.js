@@ -107,7 +107,7 @@ class Home extends Component {
 			});
 		}, setTimeout(() => {
 			console.log(this.state);
-		}, 30000));
+		}, 10000));
 	}
 
 	render() {

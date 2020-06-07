@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../style/Form.css';
 import { login, signUp } from '../../store/actions/authAction';
+import FormErrors from '../reporter/FormError';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -129,7 +130,11 @@ class SignUp extends Component {
 								<p className='submit-error text-center'>
 									{(this.state.validLogin) ? '' : 'Invalid Login details'}
 								</p>
-							</div>
+              </div>
+              <div className='error-text'>
+                <p className='submit-error text-center'>{this.state.submitError}</p>
+                <FormErrors formErrors={this.state.reportFormError} />                    
+						  </div>
 							<label for="email">Email</label>
 							<input
 								type="email"
@@ -201,7 +206,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-	//console.log(state);
+	console.log(state);
 	return{
 			response: state.auth.response
 	}

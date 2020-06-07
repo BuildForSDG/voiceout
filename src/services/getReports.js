@@ -4,7 +4,9 @@ export const getReports = (data) => {
 
   if(data && state !== ''){
     return new Promise((resolve, reject) => {
-      fetch('https://voiceout-api.herokuapp.com/api/?state=' + state)
+      fetch('https://voiceout-api.herokuapp.com/api/?state=' + state,
+        { credentials: 'include'}
+      )
       .then( data => data.json())
       .then( response => {
         resolve(response);
@@ -16,7 +18,9 @@ export const getReports = (data) => {
   }
   else{
     return new Promise((resolve, reject) => {
-      fetch('https://voiceout-api.herokuapp.com/api/')
+      fetch('https://voiceout-api.herokuapp.com/api/', 
+        { credentials: 'include'}
+      )
       .then( data => data.json())
       .then( response => {
         resolve(response);
