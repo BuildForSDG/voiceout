@@ -10,6 +10,7 @@ import { getReports } from '../../services/getReports';
 import { nigerianStates } from '../reporter/nigerianStates';
 import Loading from './Loading';
 import {connect} from 'react-redux';
+import SignUp from '../auth/SignUp';
 //import { firstRow, secondRow, thirdRow } from '../reporter/selectSectorData';
 
 
@@ -106,7 +107,7 @@ class Home extends Component {
 			});
 		}, setTimeout(() => {
 			console.log(this.state);
-		}, 30000));
+		}, 10000));
 	}
 
 	render() {
@@ -136,6 +137,11 @@ class Home extends Component {
 					? <Login 
 						loadingClick={this.loading}
 						handleLoginDisplay={this.props.handleLoginDisplay} />: ''
+				}
+				{(this.props.handleDisplayState.signUpDisplay) 
+					? <SignUp
+						loadingClick={this.loading}
+						handleSignUpDisplay={this.props.handleSignUpDisplay} />: ''
 				}
 				{(this.state.loading) 
 					? <Loading />: ''

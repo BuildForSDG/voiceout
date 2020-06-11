@@ -17,6 +17,7 @@ class NavBar extends Component {
 		if ( data == undefined || dataIsAvailable ){
 			link = <SignedOutLinks 
 				handleLoginDisplay={this.props.handleLoginDisplay}
+				handleSignUpDisplay={this.props.handleSignUpDisplay}
 			/>
 		}
 		if(localStorage.getItem('response') != undefined ){
@@ -24,6 +25,8 @@ class NavBar extends Component {
 			if(data.user){
 				link = <ReporterSignedInLinks
 					loginDisappear={this.props.loginDisappear}
+					signUpDisappear={this.props.signUpDisappear}
+
 				/>
 			}
 			

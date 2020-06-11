@@ -1,3 +1,5 @@
+import Axios from "axios";
+
 const PostReportData = (type, userData, tok) => {
 	let url = 'https://voiceout-api.herokuapp.com/api/';
 	
@@ -13,8 +15,26 @@ const PostReportData = (type, userData, tok) => {
 			state,
 			image,
 			video,
-     } = userData;
-		fetch(url + type,{mode: 'no-cors'}, {
+		 } = userData;
+		 
+		 const fd = new FormData();
+		 fd.append('title', title);
+		 fd.append('institution_name', institution);
+		 fd.append('description', report);
+		 fd.append('address', address);
+		 fd.append('state', state);
+		 fd.append('sector', sector_id);
+		 fd.append('image', image);
+		 fd.append('video', video);
+
+		 Axios.post(url + type, fd, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+        "X-CSRF-TOKEN": token,
+        "Authorization" : `Bearer ${tok}`
+			}
+		 })
+		/*fetch(url + type,{mode: 'no-cors'}, {
 			method: 'POST',
 			body: JSON.stringify({
 				title,
@@ -27,13 +47,10 @@ const PostReportData = (type, userData, tok) => {
         video: video.name
 			}),
 			headers: {
-				"Content-Type": "application/json",
-				"Accept": "application/json, text-plain, */*",
-				"X-Requested-With": "XMLHttpRequest",
         "X-CSRF-TOKEN": token,
         "Authorization" : `Bearer ${tok}`
 			}
-		})
+		})*/
 		.then((response) => response.json())
 		.then((response) => {
 			resolve(response);
