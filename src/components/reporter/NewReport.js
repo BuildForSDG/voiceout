@@ -185,6 +185,7 @@ class NewReport extends Component {
 			this.setState({
 				submitError: ''
 			})
+			console.log(this.state);
 			this.props.postReport(this.state);
 		}
 	}

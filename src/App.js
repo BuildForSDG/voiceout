@@ -24,6 +24,11 @@ class App extends Component{
 			signUpDisplay: !this.state.signUpDisplay
 		})
   }
+  signUpDisappear = () => {
+    this.setState({
+      signUpDisplay: false
+    })
+  }
   loginDisappear = () => {
     this.setState({
       loginDisplay: false
@@ -40,8 +45,10 @@ class App extends Component{
       <BrowserRouter>
         <div className="App">
           <NavBar 
+            handleSignUpDisplay={this.handleSignUpDisplay}
             handleLoginDisplay={this.handleLoginDisplay}
             loginDisappear={this.loginDisappear}
+            signUpDisappear={this.signUpDisappear}
             />
           <Switch>
             <Route
@@ -49,7 +56,8 @@ class App extends Component{
               component={() => 
                 <Home 
                   handleLoginDisplay={this.handleLoginDisplay} 
-                  handleDisplayState={this.state} 
+                  handleDisplayState={this.state}
+                  handleSignUpDisplay={this.handleSignUpDisplay} 
                 />
               }
             />

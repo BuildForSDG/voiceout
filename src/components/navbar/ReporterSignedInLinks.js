@@ -9,6 +9,7 @@ export default class ReporterSignedInLinks extends Component {
 	logout = () => {
 		localStorage.clear();
 		this.props.loginDisappear();
+		this.props.signUpDisappear();
 		window.location.reload(true)
 	}
 	render() {
