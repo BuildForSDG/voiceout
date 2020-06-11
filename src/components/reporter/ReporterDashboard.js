@@ -5,6 +5,8 @@ import { Button } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import NewReport from '../reporter/NewReport';
+import { getSectors } from '../../services/getSector';
+import Loading from '../home/Loading';
 
 
 class ReporterDashboard extends Component {
@@ -13,9 +15,34 @@ class ReporterDashboard extends Component {
 
 		this.state = {
 			showReportForm: false,
+			sectorFromBackEnd: '',
+			loading: false
 			//localStorageData: ''
 		}
 
+	}
+
+	componentDidMount(){
+		if(this.state.sectorFromBackEnd === ''){
+			this.setState({
+				loading: true
+			})
+		}else{
+			this.setState({
+				loading: false
+			})
+		};
+		if(localStorage.getItem('response')){
+			return getSectors()
+			.then(data => {
+				console.log(data);
+				this.setState({
+					sectorFromBackEnd: data,
+					loading: false
+				});
+			});
+		}
+		
 	}
 	
 	
@@ -29,7 +56,7 @@ class ReporterDashboard extends Component {
 		if(localStorage.getItem('response') == undefined) return <Redirect to='/' />
         const { response } = this.props;
 		if(localStorage.getItem('response') != undefined){
-			console.log(JSON.parse(localStorage.getItem('response')));
+			//console.log(JSON.parse(localStorage.getItem('response')));
 			const storage = JSON.parse(localStorage.getItem('response'));
 			return (
 				<div className='container'>
@@ -45,7 +72,13 @@ class ReporterDashboard extends Component {
 						<Button onClick={this.handleShowReportForm}>Make a Report</Button>
 					</header>
 					{(this.state.showReportForm)
-						? <NewReport handleShowReportForm={this.handleShowReportForm} />: ''
+						? <NewReport 
+								sectors={this.state.sectorFromBackEnd} 
+								handleShowReportForm={this.handleShowReportForm} 
+							/>: ''
+					}
+					{(this.state.loading) 
+						? <Loading />: ''
 					}
 					<h3 className='text-center'>Top Reports</h3>
 					{/*pass in results from api calls as props to ReportsList comp*/}
