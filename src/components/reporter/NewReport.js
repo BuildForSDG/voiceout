@@ -4,6 +4,8 @@ import FormErrors from './FormError';
 import { nigerianStates } from './nigerianStates';
 import { postReport } from '../../store/actions/reportPostAction';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
+
 
 class NewReport extends Component {
 	constructor(props){
@@ -192,6 +194,8 @@ class NewReport extends Component {
 	
 
 	render() {
+		const { reportPost } = this.props;
+		if (reportPost){ return <Redirect to='/reporter' />}
 		return (
 			<div>
 				<div id="id01" class="modal">
@@ -305,7 +309,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-	//console.log(state);
+	console.log(state);
 	return{
 		reportPost: state.reportPost.response
 	}

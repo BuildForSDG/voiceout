@@ -6,7 +6,10 @@ import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import NewReport from '../reporter/NewReport';
 import { getSectors } from '../../services/getSector';
+import {asyncLocalStorage} from '../../services/asyncData';
+import { getUserReports } from '../../services/getReports';
 import Loading from '../home/Loading';
+import { dispatchUserReports } from '../../store/actions/userReportAction';
 
 
 class ReporterDashboard extends Component {
@@ -16,12 +19,29 @@ class ReporterDashboard extends Component {
 		this.state = {
 			showReportForm: false,
 			sectorFromBackEnd: '',
-			loading: false
+			loading: false,
+			reports: ''
 			//localStorageData: ''
 		}
 
 	}
 
+	filterFunction = (data) => {
+		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
+		return data.user.id === getLocalStorage.user.id
+	}
+	compareSort = (a, b) => {
+		const A = new Date(a.created_at).getTime();
+		const B = new Date(b.created_at).getTime();
+
+		let comparison = 0;
+		if(A > B){
+			comparison = -1;
+		}else if(A < B){
+			comparison = 1;
+		}
+		return comparison;
+	}
 	componentDidMount(){
 		if(this.state.sectorFromBackEnd === ''){
 			this.setState({
@@ -33,7 +53,7 @@ class ReporterDashboard extends Component {
 			})
 		};
 		if(localStorage.getItem('response')){
-			return getSectors()
+			getSectors()
 			.then(data => {
 				console.log(data);
 				this.setState({
@@ -42,7 +62,24 @@ class ReporterDashboard extends Component {
 				});
 			});
 		}
-		
+		if(this.state.reports === ''){
+			this.setState({
+				loading: true
+			})
+		}
+		//const getLocalStorage = JSON.parse(localStorage.getItem('response'));
+		if(localStorage.getItem('response')){
+			getUserReports()
+			.then( data => {
+				const res = {
+					data: data.filter(this.filterFunction).sort(this.compareSort)
+				};
+				asyncLocalStorage.setItem('userReports', res);
+			})
+			.then(() => {
+				this.props.dispatchUserReports();
+			})
+		}
 	}
 	
 	
@@ -53,6 +90,8 @@ class ReporterDashboard extends Component {
 	}
 
 	render() {
+		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
+		console.log(getLocalStorage);
 		if(localStorage.getItem('response') == undefined) return <Redirect to='/' />
         const { response } = this.props;
 		if(localStorage.getItem('response') != undefined){
@@ -80,9 +119,12 @@ class ReporterDashboard extends Component {
 					{(this.state.loading) 
 						? <Loading />: ''
 					}
-					<h3 className='text-center'>Top Reports</h3>
+					<h3 className='text-center reportHeader'>My Reports</h3>
 					{/*pass in results from api calls as props to ReportsList comp*/}
-					<ReportsList />
+					{(!this.state.loading)
+						? <ReportsList /> : ''
+					}
+					
 				</div>
 			)
 		}
@@ -92,10 +134,19 @@ class ReporterDashboard extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
 	return{
-			response: state.auth.response
+		dispatchUserReports: (params) => {
+			dispatch(dispatchUserReports(params))
+		}
 	}
 }
 
-export default connect(mapStateToProps, null)(ReporterDashboard)
+const mapStateToProps = (state) => {
+	return{
+			response: state.auth.response,
+			reportPost: state.reportPost.response
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReporterDashboard);

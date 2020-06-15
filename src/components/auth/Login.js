@@ -54,7 +54,7 @@ class Login extends Component {
 		const { response } = this.props;
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
-			if (localStorageNotUndefined) return <Redirect to='/reporter' />
+			if (localStorageNotUndefined){ return <Redirect to='/reporter' />}
 		}
 		return (
 			<div>
@@ -62,7 +62,7 @@ class Login extends Component {
 					<form onSubmit={this.handleSubmit} class="modal-content animate">
 		{/*<input type="hidden" name="_token" value={token} />*/}
 						<div class="contain">
-							<span onClick={this.props.handleLoginDisplay} class="close" title="Close Modal">&times;</span>
+							<span onClick={this.props.loginDisappear} class="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
 								<p className='submit-error text-center'>
 									{(this.state.validLogin) ? '' : 'Invalid Login details'}

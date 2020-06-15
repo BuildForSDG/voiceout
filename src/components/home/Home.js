@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import ReportsList from '../reports/ReportsList';
-import '../../style/Home.css'
+import '../../style/Home.css';
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
 import Login from '../auth/Login';
 import NewReport from '../reporter/NewReport';
@@ -9,8 +9,10 @@ import { getSectors } from '../../services/getSector';
 import { getReports } from '../../services/getReports';
 import { nigerianStates } from '../reporter/nigerianStates';
 import Loading from './Loading';
+import {asyncLocalStorage} from '../../services/asyncData';
 import {connect} from 'react-redux';
 import SignUp from '../auth/SignUp';
+import { dispatchAllUsersReports } from '../../store/actions/userReportAction';
 //import { firstRow, secondRow, thirdRow } from '../reporter/selectSectorData';
 
 
@@ -19,12 +21,14 @@ class Home extends Component {
 		super(props);
 
 		this.state = {
+			canRedirect: false,
 			showAnonymousReportForm: false,
 			loading: false,
 			sectorFromBackEnd: '',
 			sector_id: [],
 			state: '',
-			reports: ''
+			reports: '',
+			reload: false
 		}
 
 	}
@@ -36,7 +40,6 @@ class Home extends Component {
 				loading: false
 			})
 		}
-
 		if(this.state.sectorFromBackEnd === ''){
 			this.setState({
 				loading: true
@@ -45,7 +48,7 @@ class Home extends Component {
 			this.setState({
 				loading: false
 			})
-		};
+		}
 		if(true){
 			return getSectors()
 			.then(data => {
@@ -101,26 +104,44 @@ class Home extends Component {
 		console.log(this.state);
 		return getReports(this.state)
 		.then(data => {
+			const res = {
+				data: data,
+				state: this.state.state
+			}
+			asyncLocalStorage.setItem('allUsersReports', res);
+		})
+		.then(() => {
+			this.props.dispatchAllUsersReports()
+		})
+		.then(() => {
 			this.setState({
-				reports: data,
-				loading: false
-			});
-		}, setTimeout(() => {
-			console.log(this.state);
-		}, 10000));
+				loading: false,
+				canRedirect: true
+			})
+		});
 	}
 
 	render() {
+		if (this.state.canRedirect) {return <Redirect to='/all_searched_reports' />}
 		const { response } = this.props;
 		const data = JSON.parse(localStorage.getItem('response'));
 		if(response.user){
 			//const localResponse = JSON.parse(localStorage.getItem('response'));
 			const reporter = response.user.role == 'user';
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
-			if (reporter && localStorageNotUndefined) return <Redirect to='/reporter' />
+			if (reporter && localStorageNotUndefined) {return <Redirect to='/reporter' />}
 		}
 		return (
-			<div className='container'>
+			<div className='must-login container'>
+				<div className='error-text'>
+					<p className='submit-error text-center'>
+						{
+							localStorage.getItem('notLoggedInMessage') !== null ? 
+							"You must login to view reports in details" : 
+							""
+						}
+					</p>
+				</div>
 				<header className='home-header text-center'> 
 					<h2>
 						“The ultimate tragedy is not 
@@ -136,7 +157,8 @@ class Home extends Component {
 				{(this.props.handleDisplayState.loginDisplay) 
 					? <Login 
 						loadingClick={this.loading}
-						handleLoginDisplay={this.props.handleLoginDisplay} />: ''
+						handleLoginDisplay={this.props.handleLoginDisplay}
+						loginDisappear={this.props.loginDisappear} />: ''
 				}
 				{(this.props.handleDisplayState.signUpDisplay) 
 					? <SignUp
@@ -193,11 +215,21 @@ class Home extends Component {
 		)
 	}
 }
+
+const mapDispatchToProps = (dispatch) => {
+	return{
+		dispatchAllUsersReports: (params) => {
+			dispatch(dispatchAllUsersReports(params))
+		}
+	}
+}
+
+
 const mapStateToProps = (state) => {
-	//console.log(state);
+	console.log(state);
 	return{
 			response: state.auth.response
 	}
 }
 
-export default connect(mapStateToProps, null)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

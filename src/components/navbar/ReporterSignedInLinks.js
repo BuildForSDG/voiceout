@@ -17,10 +17,7 @@ export default class ReporterSignedInLinks extends Component {
 		return (
 			<Nav className="ml-auto">
 				<Nav.Link href="">
-					<Link className="links" to='/'>New Report</Link>
-				</Nav.Link>
-				<Nav.Link href="">
-					<Link className="links" to='/'>My Reports</Link>
+					<Link className="links" to='/reporter'>My Reports</Link>
 				</Nav.Link>
 				<Nav.Link href="">
 					<Link className="links" to='/' onClick={this.logout}>Logout</Link>

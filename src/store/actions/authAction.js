@@ -7,6 +7,7 @@ export const login = (data) => {
 
 		return PostData('login', data)
 		.then((response) => {
+			console.log(response);
 			asyncLocalStorage.setItem('response', response);
 			//localStorage.setItem('response', JSON.stringify(response));
 			//let x = JSON.parse(localStorage.getItem('response'));
