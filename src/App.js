@@ -9,6 +9,8 @@ import Axios from "axios";
 import ReporterDashboard from './components/reporter/ReporterDashboard';
 import VoiceDashboard from './components/voice/VoiceDashboard';
 import InstitutionDashboard from './components/institution/InstitutionDashboard';
+import ReportDetails from './components/reports/ReportDetails';
+import SearchedReports from './components/home/SearchedReports';
 
 class App extends Component{
   constructor(props){
@@ -36,7 +38,7 @@ class App extends Component{
   }
   handleLoginDisplay = () => {
 		this.setState({
-			loginDisplay: !this.state.loginDisplay
+			loginDisplay: true
 		})
 	}
 
@@ -55,9 +57,10 @@ class App extends Component{
               exact path='/'
               component={() => 
                 <Home 
-                  handleLoginDisplay={this.handleLoginDisplay} 
+                  handleLoginDisplay={this.handleLoginDisplay}
                   handleDisplayState={this.state}
-                  handleSignUpDisplay={this.handleSignUpDisplay} 
+                  handleSignUpDisplay={this.handleSignUpDisplay}
+                  loginDisappear={this.loginDisappear}
                 />
               }
             />
@@ -87,6 +90,13 @@ class App extends Component{
                 dashbord loads*/
                 <InstitutionDashboard loginDisappear={this.loginDisappear}/>
               }
+            />
+            <Route path="/report/:id" component={ReportDetails} />
+            <Route 
+              path="/all_searched_reports" 
+              component={ () => 
+                <SearchedReports handleLoginDisplay={this.handleLoginDisplay} />
+              } 
             />
           </Switch>
         </div>

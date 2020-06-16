@@ -51,7 +51,8 @@ const PostReportData = (type, userData, tok) => {
         "Authorization" : `Bearer ${tok}`
 			}
 		})*/
-		.then((response) => response.json())
+		.then((response) => response.data)
+		//.then((response) => response.data.json())
 		.then((response) => {
 			resolve(response);
 		})

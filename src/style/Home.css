@@ -5,7 +5,7 @@ h2{
 	font-weight: bold;
 }
 header.home-header{
-	padding-top: 200px !important;
+	padding-top: 20px !important;
 	padding: 100px;
 	line-height: 100px;
 }
@@ -13,7 +13,6 @@ div.checkbox{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
-	//border: 1px solid rgb(172, 171, 171);
 	border-radius: 10px;
 }
 div.checkbox > form{
@@ -30,12 +29,31 @@ table{
 	width: 100%;
 }
 button.sector_submit {
-  background-color:;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
 	width: 200px;
-	
+}
+.report-summary{
+	border-bottom: 1px solid #000;
+	border-radius: 5px;
+	width: 60%;
+}
+.reportHeader{
+	color: #000;
+	font-size: 2rem;
+}
+.searched-reports-div{
+	padding-top: 100px;
+}
+.must-login{
+	padding-top: 100px;
+}
+.time{
+	color: rgb(248, 85, 85)
+}
+.authorName{
+	color: rgb(36, 65, 231)
 }

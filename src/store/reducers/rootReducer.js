@@ -1,10 +1,16 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-import postReportReducer from './postReportReducer';
+import {postReportReducer, 
+    userReportsReducer, 
+    allUsersReportsReducer
+} from './postReportReducer';
+
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    reportPost: postReportReducer
+    reportPost: postReportReducer,
+    userReports: userReportsReducer,
+    allUsersReports: allUsersReportsReducer
 })
 
 export default rootReducer;

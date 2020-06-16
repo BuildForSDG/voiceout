@@ -8,15 +8,13 @@ export const postReport = (data) => {
     const token = getLocalStorage.token;
     console.log('loadingg');
     return PostReportData('reports', data, token)
-		.then((response) => {
-      console.log(response);
+		/*.then((response) => {
+      console.log("response");
       asyncLocalStorage.setItem('reportResponse', response);
       
-		})
-		.then(() => {
-			return asyncLocalStorage.getItem('reportResponse');
-		})
+		})*/
 		.then((response) => {
+			console.log(response);
 			dispatch({
 				type: 'POST_SUCCESS',
 				reportResponse: response
