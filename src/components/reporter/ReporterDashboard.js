@@ -92,7 +92,7 @@ class ReporterDashboard extends Component {
 	render() {
 		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
 		console.log(getLocalStorage);
-		if(localStorage.getItem('response') == undefined) return <Redirect to='/' />
+		if(localStorage.getItem('response') == undefined) {return <Redirect to='/' />}
         const { response } = this.props;
 		if(localStorage.getItem('response') != undefined){
 			//console.log(JSON.parse(localStorage.getItem('response')));
@@ -143,6 +143,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
+	console.log(state)
 	return{
 			response: state.auth.response,
 			reportPost: state.reportPost.response

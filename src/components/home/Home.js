@@ -134,7 +134,6 @@ class Home extends Component {
 			//const localResponse = JSON.parse(localStorage.getItem('response'));
 			const reporter = response.user.role == 'user';
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
-			//if (reporter && localStorageNotUndefined) {return <Redirect to='/reporter' />}
 		}
 		return (
 			<div className='must-login container'>
@@ -159,12 +158,12 @@ class Home extends Component {
 						<Button onClick={this.handleShowReportForm}>Make a Report</Button>*/
 					}
 				</header>
-				{(this.props.handleDisplayState.loginDisplay) 
+				{/*(this.props.handleDisplayState.loginDisplay) 
 					? <Login 
 						notLoading={this.notLoading}
 						loadingClick={this.loading}
 						handleLoginDisplay={this.props.handleLoginDisplay}
-						loginDisappear={this.props.loginDisappear} />: ''
+						loginDisappear={this.props.loginDisappear} />: ''*/
 				}
 				{(this.props.handleDisplayState.signUpDisplay) 
 					? <SignUp

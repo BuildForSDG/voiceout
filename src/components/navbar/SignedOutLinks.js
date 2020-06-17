@@ -14,7 +14,7 @@ export default class SignedOutLinks extends Component {
 					<Link onClick={this.props.handleSignUpDisplay} className="links">Sign Up</Link>
 				</Nav.Link>
 				<Nav.Link href="#link">
-					<Link onClick={this.props.handleLoginDisplay} className="links">Login</Link>
+					<Link onClick={this.props.handleLoginDisplay} to="/login" className="links">Login</Link>
 				</Nav.Link>
 			</Nav>
 		)

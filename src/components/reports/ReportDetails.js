@@ -27,7 +27,8 @@ class ReportDetails extends Component {
 	componentDidMount(){
 		const { match: { params } } = this.props;
 		const {userReports} = this.props;
-		if(localStorage.getItem('response') && userReports){
+		const data = JSON.parse(localStorage.getItem('response'));
+		if( data.user != undefined && userReports){
 			const singleData = userReports.filter(data => {
 				return data.id == params.id
 			})
@@ -36,7 +37,7 @@ class ReportDetails extends Component {
 		setTimeout(() => {
 			this.props.singleReport();
 		}, 1000);
-		if(localStorage.getItem('response')){
+		if(data.user !== undefined){
 			const getLocalStorage = JSON.parse(localStorage.getItem('response'));
 			const user_id = getLocalStorage.user.id;
 			getVotes(params.id)
@@ -105,7 +106,8 @@ class ReportDetails extends Component {
 	}
 	render() {
 		const {oneReport} = this.props;
-		if(localStorage.getItem('response') == undefined) {return <Redirect to='/' />}
+		const data = JSON.parse(localStorage.getItem('response'));
+		if(data.user == undefined ) {return <Redirect to='/' />}
 		if(oneReport && oneReport.id == this.props.match.params.id){
 			const date = dateFromData(oneReport);
 			return (

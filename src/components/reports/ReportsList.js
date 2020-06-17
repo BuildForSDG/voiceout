@@ -13,7 +13,6 @@ class ReportsList extends Component {
 			reports: '',
 			canRedirect: false
 		}
-
 	}
 	componentDidMount(){
 		this.setState({
@@ -30,14 +29,16 @@ class ReportsList extends Component {
 	render() {
 		if (this.state.canRedirect) {return <Redirect to='/' />}
 		const { userReports } = this.props;
+		const data = JSON.parse(localStorage.getItem('response'));
+		const user = data.user;
 		return (
 			<div>
 				{/*mapping reports from props*/}
 				
 				{	
-					userReports && userReports.map((data, i) => {
+					userReports.userReports && userReports.userReports.data.map((data, i) => {
 						return (
-							localStorage.getItem('response') ? 
+							user ? 
 							<Link key={i} className="links" to={'/report/' + data.id}>
 								<ReportsSummary data={data}/>	
 							</Link>
@@ -56,7 +57,7 @@ class ReportsList extends Component {
 const mapStateToProps = (state) => {
 	//console.log(state.userReports.userReports.data);
 	return{
-			userReports: state.userReports.userReports.data,
+			userReports: state.userReports,
 	}
 }
 

@@ -18,7 +18,7 @@ export default class ReportsSummary extends Component {
 							data.media_url.images : 
 							"https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1"
 						}
-						fluid 
+						fluid
 						
 					/>
 					<figcaption>{data.title}</figcaption>
