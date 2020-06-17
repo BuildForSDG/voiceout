@@ -22,7 +22,7 @@ class SearchedReports extends Component {
             }
           </h1>
           <div >
-            <ReportsList handleLoginDisplay={this.props.handleLoginDisplay}/>
+            <ReportsList />
           </div>
         </div>
       </div>

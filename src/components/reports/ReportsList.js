@@ -20,17 +20,17 @@ class ReportsList extends Component {
 		})
 	}
 	handleUserNotLoggedIn = () => {
-		asyncLocalStorage.setItem('notLoggedInMessage', 'Not Logged In');
+		localStorage.setItem('notLoggedInMessage', 'Not Logged In');
 		this.setState({
 			canRedirect: true,
 		});
+		console.log("object")
 	}
 
 	render() {
 		if (this.state.canRedirect) {return <Redirect to='/' />}
 		const { userReports } = this.props;
-		const data = JSON.parse(localStorage.getItem('response'));
-		const user = data.user;
+		const storageData = JSON.parse(localStorage.getItem('response'));
 		return (
 			<div>
 				{/*mapping reports from props*/}
@@ -38,12 +38,12 @@ class ReportsList extends Component {
 				{	
 					userReports.userReports && userReports.userReports.data.map((data, i) => {
 						return (
-							user ? 
+							storageData && storageData.user  ? 
 							<Link key={i} className="links" to={'/report/' + data.id}>
 								<ReportsSummary data={data}/>	
 							</Link>
 							:
-							<Link onClick={this.handleUserNotLoggedIn}>
+							<Link key={i} onClick={this.handleUserNotLoggedIn}>
 								<ReportsSummary data={data}/>	
 							</Link>
 						)

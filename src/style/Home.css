@@ -68,3 +68,6 @@ div.singleReport{
 i:hover{
 	cursor: pointer;
 }
+.small-letter{
+	font-size: smaller;
+}

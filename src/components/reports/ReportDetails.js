@@ -28,7 +28,7 @@ class ReportDetails extends Component {
 		const { match: { params } } = this.props;
 		const {userReports} = this.props;
 		const data = JSON.parse(localStorage.getItem('response'));
-		if( data.user != undefined && userReports){
+		if( data && data.user != undefined && userReports){
 			const singleData = userReports.filter(data => {
 				return data.id == params.id
 			})
@@ -37,7 +37,7 @@ class ReportDetails extends Component {
 		setTimeout(() => {
 			this.props.singleReport();
 		}, 1000);
-		if(data.user !== undefined){
+		if(data && data.user !== undefined){
 			const getLocalStorage = JSON.parse(localStorage.getItem('response'));
 			const user_id = getLocalStorage.user.id;
 			getVotes(params.id)
@@ -107,7 +107,8 @@ class ReportDetails extends Component {
 	render() {
 		const {oneReport} = this.props;
 		const data = JSON.parse(localStorage.getItem('response'));
-		if(data.user == undefined ) {return <Redirect to='/' />}
+		if(data && !data.hasOwnProperty('user') ) {return <Redirect to='/' />}
+		if(data == undefined){ return <Redirect to='/' />}
 		if(oneReport && oneReport.id == this.props.match.params.id){
 			const date = dateFromData(oneReport);
 			return (
@@ -133,7 +134,7 @@ class ReportDetails extends Component {
 							</video>
 							:''
 						}
-						<p className='time'>Reported on {date.days[date.day]}, 
+						<p className='time small-letter'>Reported on {date.days[date.day]}, 
 							{" " + date.date} - 
 							{date.months[date.month]} - 
 							{date.year + " "} at
@@ -141,10 +142,10 @@ class ReportDetails extends Component {
 							{date.minutes + " "} 
 							hours
 						</p>
-						<p className='authorName'>By {oneReport.user.first_name + " " + oneReport.user.last_name}</p>
+						<p className='small-letter authorName'>By {oneReport.user.first_name + " " + oneReport.user.last_name}</p>
 						<p>{oneReport.description}</p>
-						<p>Location: {oneReport.address}</p>
-						<p>State: {oneReport.state}</p>
+						<p className='small-letter'>Location: {oneReport.address}</p>
+						<p className='small-letter'>State: {oneReport.state}</p>
 						<div className='votes'>
 							{
 								this.state.upvote ? 
