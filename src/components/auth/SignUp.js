@@ -115,6 +115,7 @@ class SignUp extends Component {
 	render() {
 		//console.log(this.state.isLoading)
 		const { response } = this.props;
+		if(response !== '') {this.props.notLoading()};
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 			if (localStorageNotUndefined) return <Redirect to='/reporter' />
@@ -128,7 +129,7 @@ class SignUp extends Component {
 							<span onClick={this.props.handleSignUpDisplay} class="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
 								<p className='submit-error text-center'>
-									{(this.state.validLogin) ? '' : 'Invalid Login details'}
+								{(response.message) ? 'Email already exists' : ''}
 								</p>
               </div>
               <div className='error-text'>

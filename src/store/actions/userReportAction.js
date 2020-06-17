@@ -1,7 +1,7 @@
 
 import {asyncLocalStorage} from '../../services/asyncData'
 
-export const dispatchUserReports = (data) => {
+export const dispatchUserReports = () => {
 	return (dispatch, getState) => {
 
 		asyncLocalStorage.getItem('userReports')
@@ -18,7 +18,7 @@ export const dispatchUserReports = (data) => {
 }
 
 
-export const dispatchAllUsersReports = (data) => {
+export const dispatchAllUsersReports = () => {
 	return (dispatch, getState) => {
 
 		asyncLocalStorage.getItem('allUsersReports')
@@ -30,6 +30,22 @@ export const dispatchAllUsersReports = (data) => {
 		})
 		.catch((err) => {
 			dispatch({type: 'REPORT_ERROR', err: err})
+		})
+	}
+}
+
+export const singleReport = () => {
+	return (dispatch, getState) => {
+
+		asyncLocalStorage.getItem('singleData')
+		.then((response) => {
+			dispatch({
+				type: 'SINGLE_REPORT_SUCCESS',
+				response: response
+			})
+		})
+		.catch((err) => {
+			dispatch({type: 'SINGLE_REPORT_ERROR', err: err})
 		})
 	}
 }

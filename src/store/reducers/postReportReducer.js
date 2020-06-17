@@ -47,21 +47,21 @@ export const userReportsReducer = (state = reportState, action) => {
 }
 
 const allReportState = {
-	allUsersReports: '',
+	singleReport: '',
 	err: ''
 }
-export const allUsersReportsReducer = (state = allReportState, action) => {
+export const singleReportReducer = (state = allReportState, action) => {
 	switch (action.type) {
-		case 'ALL_REPORT_SUCCESS':
+		case 'SINGLE_REPORT_SUCCESS':
 			return {
 				...state,
-				allUsersReports: action.response
+				singleReport: action.response
 			}
-		case 'ALL_REPORT_ERROR':
+		case 'SINGLE_REPORT_ERROR':
 			return{
 				...state,
 				err: action.err,
-				allUsersReports: ''
+				singleReport: ''
 			}
 		default:
 			return state

@@ -30,16 +30,15 @@ class ReportsList extends Component {
 	render() {
 		if (this.state.canRedirect) {return <Redirect to='/' />}
 		const { userReports } = this.props;
-		console.log(userReports);
 		return (
 			<div>
 				{/*mapping reports from props*/}
 				
 				{	
-					userReports && userReports.map(data => {
+					userReports && userReports.map((data, i) => {
 						return (
 							localStorage.getItem('response') ? 
-							<Link className="links" to={'/report/' + data.id}>
+							<Link key={i} className="links" to={'/report/' + data.id}>
 								<ReportsSummary data={data}/>	
 							</Link>
 							:
