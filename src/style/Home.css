@@ -5,7 +5,7 @@ h2{
 	font-weight: bold;
 }
 header.home-header{
-	padding-top: 20px !important;
+	padding-top: 100px !important;
 	padding: 100px;
 	line-height: 100px;
 }
@@ -48,7 +48,7 @@ button.sector_submit {
 .searched-reports-div{
 	padding-top: 100px;
 }
-.must-login{
+.must-login, div.singleReport-body{
 	padding-top: 100px;
 }
 .time{
@@ -56,4 +56,15 @@ button.sector_submit {
 }
 .authorName{
 	color: rgb(36, 65, 231)
+}
+div.singleReport{
+	line-height: 2rem;
+	width: 80%;
+	margin: auto;
+	padding: 3rem;
+	font-size: larger;
+	border-radius: 5px;
+}
+i:hover{
+	cursor: pointer;
 }

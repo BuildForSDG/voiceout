@@ -23,7 +23,7 @@ const PostReportData = (type, userData, tok) => {
 		 fd.append('description', report);
 		 fd.append('address', address);
 		 fd.append('state', state);
-		 fd.append('sector', sector_id);
+		 fd.append('sector_id', sector_id);
 		 fd.append('image', image);
 		 fd.append('video', video);
 
@@ -34,23 +34,6 @@ const PostReportData = (type, userData, tok) => {
         "Authorization" : `Bearer ${tok}`
 			}
 		 })
-		/*fetch(url + type,{mode: 'no-cors'}, {
-			method: 'POST',
-			body: JSON.stringify({
-				title,
-        institution_name: institution,
-				description: report,
-				address,
-        sector_id,
-        state,
-        image: image.name,
-        video: video.name
-			}),
-			headers: {
-        "X-CSRF-TOKEN": token,
-        "Authorization" : `Bearer ${tok}`
-			}
-		})*/
 		.then((response) => response.data)
 		//.then((response) => response.data.json())
 		.then((response) => {

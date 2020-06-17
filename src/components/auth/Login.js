@@ -10,6 +10,7 @@ class Login extends Component {
 		this.state = {
 			email: '',
 			password: '',
+			errorMessage: '',
 			isLoading: false,
 			isValid: false,
 			redirect: false,
@@ -19,11 +20,18 @@ class Login extends Component {
 	}
 	componentDidMount(){
 		const {response} = this.props;
-		let invalidResponse = response != '' && !response.hasOwnProperty('user');
-		if(invalidResponse)
-		this.setState({
-			validLogin: false
-		});
+		let invalidResponse = response.message;
+		if(response !== ''){
+			this.props.notLoading();
+			console.log(response);
+			localStorage.clear();
+			this.setState({
+				validLogin: false,
+				errorMessage: "Email or Password Incorrect",
+				isLoading: false
+			});
+		}
+		
 		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
 		if(getLocalStorage && !getLocalStorage.hasOwnProperty('user')){
 			localStorage.clear();
@@ -41,17 +49,11 @@ class Login extends Component {
 		this.props.login(this.state);
 		//this.props.handleLoginDisplay();
 		this.props.loadingClick();
-
-		if(this.props.response.user === undefined){
-			this.setState({
-				isLoading: true
-			})
-		}
 	}
 
 	render() {
-		//console.log(this.state.isLoading)
 		const { response } = this.props;
+		if(response !== '') {this.props.notLoading()};
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 			if (localStorageNotUndefined){ return <Redirect to='/reporter' />}
@@ -65,7 +67,7 @@ class Login extends Component {
 							<span onClick={this.props.loginDisappear} class="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
 								<p className='submit-error text-center'>
-									{(this.state.validLogin) ? '' : 'Invalid Login details'}
+									{(response.message) ? 'Invalid Login' : ''}
 								</p>
 							</div>
 							<label for="email">Email</label>

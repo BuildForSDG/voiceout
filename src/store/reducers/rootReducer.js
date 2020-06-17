@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import {postReportReducer, 
     userReportsReducer, 
-    allUsersReportsReducer
+    singleReportReducer
 } from './postReportReducer';
 
 
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     reportPost: postReportReducer,
     userReports: userReportsReducer,
-    allUsersReports: allUsersReportsReducer
+    singleReport: singleReportReducer
 })
 
 export default rootReducer;
