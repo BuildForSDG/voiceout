@@ -11,6 +11,7 @@ import VoiceDashboard from './components/voice/VoiceDashboard';
 import InstitutionDashboard from './components/institution/InstitutionDashboard';
 import ReportDetails from './components/reports/ReportDetails';
 import SearchedReports from './components/home/SearchedReports';
+import Login from './components/auth/Login';
 
 class App extends Component{
   constructor(props){
@@ -71,6 +72,19 @@ class App extends Component{
                 /* passing this props will ensure the loginDisplay returns false a s a the reporter
                 dashbord loads*/
                 <ReporterDashboard loginDisappear={this.loginDisappear}/>
+              }
+            />
+            <Route
+              path='/login'
+              component={() => 
+                //when the when loginDisplay is set to true, it remains true even when you logout
+                /* passing this props will ensure the loginDisplay returns false a s a the reporter
+                dashbord loads*/
+                <Login 
+                  handleLoginDisplay={this.handleLoginDisplay}
+                  handleDisplayState={this.state}
+                  handleSignUpDisplay={this.handleSignUpDisplay}
+                  loginDisappear={this.loginDisappear}/>
               }
             />
             <Route

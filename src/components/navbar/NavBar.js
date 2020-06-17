@@ -9,6 +9,7 @@ class NavBar extends Component {
 	constructor(props){
 		super(props);
 	}
+	
 		
 	render() {
 		let link = '';
@@ -36,7 +37,11 @@ class NavBar extends Component {
 				<Container>
 					<Navbar className="color-nav" bg='' expand="lg">
 						<Navbar.Brand href="">
-							<Link className="links brandName" to='/'>VoiceOut</Link>
+							<Link
+								className="links brandName" 
+								to='/'>
+									VoiceOut
+							</Link>
 						</Navbar.Brand>
 						<Navbar.Toggle aria-controls="basic-navbar-nav" />
 						<Navbar.Collapse id="basic-navbar-nav">

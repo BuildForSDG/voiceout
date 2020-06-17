@@ -16,13 +16,13 @@ class SearchedReports extends Component {
         <div className='container text-center searched-reports-div'>
           <h1>All Reports
             {
-              (userReportsState) ?
-              " By " + userReportsState + " State" :
+              (userReportsState.hasOwnProperty(userReportsState)) ?
+              " By " + userReportsState.userReportsState.state + " State" :
               ""
             }
           </h1>
           <div >
-            <ReportsList handleLoginDisplay={this.props.handleLoginDisplay}/>
+            <ReportsList />
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
 	console.log(state);
 	return{
-    userReportsState: state.userReports.userReports.state,
+    userReportsState: state.userReports,
 	}
 }
 

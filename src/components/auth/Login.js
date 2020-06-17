@@ -3,6 +3,7 @@ import '../../style/Form.css';
 import { login } from '../../store/actions/authAction';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
+import Loading from '../home/Loading';
 
 class Login extends Component {
 	constructor(props){
@@ -14,27 +15,32 @@ class Login extends Component {
 			isLoading: false,
 			isValid: false,
 			redirect: false,
-			validLogin: true
+			validLogin: true,
+			cancle: false,
+			reupdate: true
 		}
-
 	}
+
 	componentDidMount(){
 		const {response} = this.props;
 		let invalidResponse = response.message;
 		if(response !== ''){
-			this.props.notLoading();
-			console.log(response);
-			localStorage.clear();
 			this.setState({
-				validLogin: false,
-				errorMessage: "Email or Password Incorrect",
 				isLoading: false
 			});
 		}
 		
 		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
 		if(getLocalStorage && !getLocalStorage.hasOwnProperty('user')){
-			localStorage.clear();
+			//localStorage.clear();
+		}
+	}
+	componentDidUpdate(){
+		if(this.props.response.message && this.state.reupdate){
+			this.setState({
+				isLoading: false,
+				reupdate: false
+			})
 		}
 	}
 
@@ -47,24 +53,35 @@ class Login extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.login(this.state);
-		//this.props.handleLoginDisplay();
-		this.props.loadingClick();
+		//this.props.loadingClick();
+		this.setState({
+			isLoading: true
+		})
+	}
+	toHome = () => {
+		this.setState({
+			cancel: true
+		})
 	}
 
 	render() {
 		const { response } = this.props;
-		if(response !== '') {this.props.notLoading()};
+		if(this.state.cancel){ return <Redirect to='/' /> }
+		//if(response !== '') {this.props.notLoading()};
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 			if (localStorageNotUndefined){ return <Redirect to='/reporter' />}
 		}
 		return (
 			<div>
+				{(this.state.isLoading) 
+					? <Loading />: ''
+				}
 				<div id="id01" class="modal">
 					<form onSubmit={this.handleSubmit} class="modal-content animate">
 		{/*<input type="hidden" name="_token" value={token} />*/}
 						<div class="contain">
-							<span onClick={this.props.loginDisappear} class="close" title="Close Modal">&times;</span>
+							<span onClick={this.toHome} class="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
 								<p className='submit-error text-center'>
 									{(response.message) ? 'Invalid Login' : ''}
