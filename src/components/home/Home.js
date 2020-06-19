@@ -128,8 +128,7 @@ class Home extends Component {
 			}
 			asyncLocalStorage.setItem('allUsersReports', res);
 		})
-		.then((res) => {
-			console.log(res)
+		.then(() => {
 			this.props.dispatchAllUsersReports()
 		})
 		.then(() => {
@@ -149,8 +148,6 @@ class Home extends Component {
 			const reporter = response.user.role == 'user';
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 		}
-		
-		console.log(localStorage.getItem('notLoggedInMessage'));
 		return (
 			<div className='must-login container'>
 				<div className='error-text'>
