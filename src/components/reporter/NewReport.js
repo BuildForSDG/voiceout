@@ -164,10 +164,12 @@ class NewReport extends Component {
 		let sector_id = this.state.sector_id;
 		let index;
 		if(e.target.checked){
-			sector_id.push(e.target.value);
+			let toNumber = Number(e.target.value);
+			sector_id.push(toNumber);
 		}
 		else{
-			index = sector_id.indexOf(e.target.value);
+			let toNumber = Number(e.target.value);
+			index = sector_id.indexOf(toNumber);
       sector_id.splice(index, 1);
 		}
 		this.setState({
