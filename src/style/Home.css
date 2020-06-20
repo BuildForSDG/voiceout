@@ -71,3 +71,27 @@ i:hover{
 .small-letter{
 	font-size: smaller;
 }
+div.returned-comments{
+	background-color: #ddd;
+	padding: 15px;
+	border-top: 1px solid #888;
+	border-bottom: 1px solid #888;
+	line-height: 15px;
+}
+.comment-description{
+	font-size: 1rem;
+}
+.comment-author{
+	font-size: 12px;
+	color: rgb(36, 65, 231);
+	font-style: italic; 
+}
+.smaller-letter{
+	font-size: 12px;
+}
+
+@media only screen and (max-width: 765px) {
+  div.singleReport{
+		width: 100%;
+	}
+}

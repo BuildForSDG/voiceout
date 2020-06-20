@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import ReportsSummary from './ReportsSummary';
 import { Link, Redirect } from 'react-router-dom';
-import { asyncLocalStorage } from '../../services/asyncData';
+//import { asyncLocalStorage } from '../../services/asyncData';
 
 
 class ReportsList extends Component {

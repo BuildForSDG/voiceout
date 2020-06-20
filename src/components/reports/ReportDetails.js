@@ -6,7 +6,7 @@ import { singleReport } from '../../store/actions/userReportAction';
 import Loading from '../home/Loading';
 import Image from 'react-bootstrap/Image'
 import { dateFromData } from '../../services/dateFromData';
-import PostComment from '../../services/postComment';
+import {PostComment, GetComments} from '../../services/postComment';
 import { upvote, downvote } from '../../services/votes';
 import { getVotes } from '../../services/getVotes';
 
@@ -21,11 +21,20 @@ class ReportDetails extends Component {
 			comment: '',
 			commentValid: false,
 			upvote: false,
-			downvote: false
+			downvote: false,
+			returnedComments: ''
 		}
 	}
 	componentDidMount(){
 		const { match: { params } } = this.props;
+		
+		GetComments(params.id)
+		.then(res => {
+			this.setState({
+				returnedComments: res
+			})
+		})
+
 		const {userReports} = this.props;
 		const data = JSON.parse(localStorage.getItem('response'));
 		if( data && data.user != undefined && userReports){
@@ -63,7 +72,7 @@ class ReportDetails extends Component {
 		})
   }
   validateContent = (fieldName, value) => {
-		const commentValid = this.state.commentValid;
+		let commentValid = this.state.commentValid;
 		if (fieldName === 'comment'){
 				commentValid = value.length > 2;
 		}
@@ -74,9 +83,14 @@ class ReportDetails extends Component {
 		this.setState({
 				comment: ''
 		})
+		console.log(this.state);
 		const id = this.props.match.params.id;
 		PostComment(id, this.state.comment)
-		.then((res) => console.log(res));
+		.then((res) => {
+			this.setState({
+				returnedComments: res
+			})
+		});
 	}
 	upvote = () => {
 		const id = this.props.match.params.id;
@@ -189,13 +203,37 @@ class ReportDetails extends Component {
 						<div className='commentReport'>
 							<form onSubmit={this.handleSubmit}>
 								<label>Comments</label>
+								<div className='returned-comments'>
+									{
+										this.state.returnedComments &&
+										this.state.returnedComments.map((data, i) => {
+											const date = dateFromData(data);
+											return (
+												<div key={i}>
+													<p className='comment-description'>{data.description}</p>
+													<p className='comment-author'>Author - {data.user.first_name + ' ' + data.user.last_name}</p>
+													<p className='time smaller-letter'>Commented on {date.days[date.day]}, 
+														{" " + date.date} - 
+														{date.months[date.month]} - 
+														{date.year + " "} at
+														{" " + date.hours}: 
+														{date.minutes + " "} 
+														hours
+													</p>
+													<hr />
+												</div>
+											)
+										})
+									}
+								</div>
 								<textarea
 									placeholder='Add your comments here'
-									name='comments' 
+									name='comment'
 									cols="30" 
 									rows="10" 
 									className="textarea" 
-									onChange={this.handleChange}>
+									onChange={this.handleChange}
+									value={this.state.comment}>
 								</textarea>
 								<button className="btn btn-primary">Add Comment</button>
 							</form>
