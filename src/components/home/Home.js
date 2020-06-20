@@ -101,6 +101,19 @@ class Home extends Component {
 		});
 	}
 
+	compareSort = (a, b) => {
+		const A = new Date(a.created_at).getTime();
+		const B = new Date(b.created_at).getTime();
+
+		let comparison = 0;
+		if(A > B){
+			comparison = -1;
+		}else if(A < B){
+			comparison = 1;
+		}
+		return comparison;
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.setState({
@@ -110,7 +123,7 @@ class Home extends Component {
 		return getReports(this.state)
 		.then(data => {
 			const res = {
-				data: data,
+				data: data.sort(this.compareSort),
 				state: this.state.state
 			}
 			asyncLocalStorage.setItem('allUsersReports', res);
@@ -135,8 +148,6 @@ class Home extends Component {
 			const reporter = response.user.role == 'user';
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 		}
-		
-		console.log(localStorage.getItem('notLoggedInMessage'));
 		return (
 			<div className='must-login container'>
 				<div className='error-text'>

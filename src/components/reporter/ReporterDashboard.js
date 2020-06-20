@@ -99,7 +99,8 @@ class ReporterDashboard extends Component {
 			const storage = JSON.parse(localStorage.getItem('response'));
 			return (
 				<div className='container'>
-					<header className='home-header text-center'> 
+					<header className='home-header text-center'>
+					<p>Click here to go Anonymous</p>
 						<h1>Welcome 
 							<span className="name">
 								{storage ? " " + storage.user.first_name + " " + storage.user.last_name : ''}

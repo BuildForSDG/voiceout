@@ -144,6 +144,13 @@ class ReportDetails extends Component {
 						</p>
 						<p className='small-letter authorName'>By {oneReport.user.first_name + " " + oneReport.user.last_name}</p>
 						<p>{oneReport.description}</p>
+						<p className='small-letter'>Sector: {
+							oneReport.sector.map((data, i) => {
+								return (
+									<span key={i}>{data.name}</span>
+								)
+							})
+						}</p>
 						<p className='small-letter'>Location: {oneReport.address}</p>
 						<p className='small-letter'>State: {oneReport.state}</p>
 						<div className='votes'>
