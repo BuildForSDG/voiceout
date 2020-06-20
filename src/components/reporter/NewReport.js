@@ -69,7 +69,7 @@ class NewReport extends Component {
 	validateCheckbox = (sector_id) => {
 		let sectorValid = this.state.sectorValid;
 		let reportFormError = this.state.reportFormError;
-		sectorValid = sector_id.length != 0;
+		sectorValid = sector_id.length !== 0;
 		reportFormError.sector_id = sectorValid ? '': 'You must check a sector';
 		this.setState({
 			sectorValid: sectorValid,

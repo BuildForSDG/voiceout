@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReportsList from '../reports/ReportsList';
-import '../../style/Home.css'
+import '../../style/Home.css';
+import '../../style/Anonymous.css';
 import { Button } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom'
@@ -20,7 +21,8 @@ class ReporterDashboard extends Component {
 			showReportForm: false,
 			sectorFromBackEnd: '',
 			loading: false,
-			reports: ''
+			reports: '',
+			anonymous: false
 			//localStorageData: ''
 		}
 
@@ -82,6 +84,11 @@ class ReporterDashboard extends Component {
 		}
 	}
 	
+	handleAnonymousToggle = () => {
+		this.setState({
+			anonymous: !this.state.anonymous
+		})
+	}
 	
 	handleShowReportForm = () => {
 		this.setState({
@@ -98,18 +105,46 @@ class ReporterDashboard extends Component {
 			//console.log(JSON.parse(localStorage.getItem('response')));
 			const storage = JSON.parse(localStorage.getItem('response'));
 			return (
-				<div className='container'>
+				<div className={
+					this.state.anonymous ?
+					'anonymous text-center':
+					'text-center'
+				}>
 					<header className='home-header text-center'>
-					<p>Click here to go Anonymous</p>
+					<Button 
+						className={
+							this.state.anonymous?
+							'anonymous-yellow':
+							''
+						} 
+						onClick={this.handleAnonymousToggle}>
+						{
+							this.state.anonymous ?
+							'Go Visible':
+							'Go Anonymous'
+						}
+					</Button>
 						<h1>Welcome 
-							<span className="name">
+							<span 
+								className={
+									this.state.anonymous?
+									'anonymous-yellow name':
+									'name'
+								}
+							>
 								{storage ? " " + storage.user.first_name + " " + storage.user.last_name : ''}
 							</span>
 						</h1>
 						<h2>
 						“The rights of every man are diminished when the rights of one man are threatened 
 						</h2>
-						<Button onClick={this.handleShowReportForm}>Make a Report</Button>
+						<Button
+							className={
+								this.state.anonymous?
+								'anonymous-yellow':
+								''
+							} 
+							onClick={this.handleShowReportForm}>Make a Report</Button>
 					</header>
 					{(this.state.showReportForm)
 						? <NewReport 
@@ -120,7 +155,13 @@ class ReporterDashboard extends Component {
 					{(this.state.loading) 
 						? <Loading />: ''
 					}
-					<h3 className='text-center reportHeader'>My Reports</h3>
+					<h3 
+						className={
+							this.state.anonymous?
+							'yellow text-center':
+							'text-center reportHeader'
+						}
+					>My Reports</h3>
 					{/*pass in results from api calls as props to ReportsList comp*/}
 					{(!this.state.loading)
 						? <ReportsList /> : ''
