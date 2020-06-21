@@ -120,6 +120,7 @@ class ReportDetails extends Component {
 	}
 	render() {
 		const {oneReport} = this.props;
+		console.log(oneReport);
 		const data = JSON.parse(localStorage.getItem('response'));
 		if(data && !data.hasOwnProperty('user') ) {return <Redirect to='/' />}
 		if(data == undefined){ return <Redirect to='/' />}
@@ -142,7 +143,7 @@ class ReportDetails extends Component {
 						</figure>
 						{
 							oneReport.media_url.videos ? 
-							<video id="video1" width="420" autoplay>
+							<video id="video1" height="300" width="420" controls>
 								<source src={oneReport.media_url.videos}/>
 								Your browser does not support HTML video.
 							</video>
@@ -156,7 +157,13 @@ class ReportDetails extends Component {
 							{date.minutes + " "} 
 							hours
 						</p>
-						<p className='small-letter authorName'>By {oneReport.user.first_name + " " + oneReport.user.last_name}</p>
+						<p className='small-letter authorName'>By 
+							{
+								oneReport.anonymous === 1 ?
+								' Anonymous' :
+								" " + oneReport.user.first_name + " " + oneReport.user.last_name
+							}
+						</p>
 						<p>{oneReport.description}</p>
 						<p className='small-letter'>Sector: {
 							oneReport.sector.map((data, i) => {
@@ -201,8 +208,7 @@ class ReportDetails extends Component {
 							</div>
 						<hr/>
 						<div className='commentReport'>
-							<form onSubmit={this.handleSubmit}>
-								<label>Comments</label>
+							<label>Comments</label>
 								<div className='returned-comments'>
 									{
 										this.state.returnedComments &&
@@ -226,6 +232,7 @@ class ReportDetails extends Component {
 										})
 									}
 								</div>
+							<form onSubmit={this.handleSubmit}>
 								<textarea
 									placeholder='Add your comments here'
 									name='comment'
@@ -235,7 +242,7 @@ class ReportDetails extends Component {
 									onChange={this.handleChange}
 									value={this.state.comment}>
 								</textarea>
-								<button className="btn btn-primary">Add Comment</button>
+								<button type='submit' className="btn btn-primary">Add Comment</button>
 							</form>
 						</div>
 					</div>

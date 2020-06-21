@@ -20,6 +20,7 @@ class NewReport extends Component {
 			state: '',
 			image: '',
 			video: '',
+			anonymous: false,
 			addressValid: false,
 			titleValid: false,
 			institutionValid: false,
@@ -41,6 +42,13 @@ class NewReport extends Component {
 			}
 		}
 	}
+
+	componentDidMount(){
+		this.setState({
+			anonymous: this.props.anonymous
+		})
+	}
+
 	validateMedia = (fieldName, value) => {
 		let imageValid = this.state.imageValid;
 		let videoValid = this.state.videoValid;
@@ -193,7 +201,6 @@ class NewReport extends Component {
 			this.props.postReport(this.state);
 		}
 	}
-	
 
 	render() {
 		const { reportPost } = this.props;

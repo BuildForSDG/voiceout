@@ -147,7 +147,8 @@ class ReporterDashboard extends Component {
 							onClick={this.handleShowReportForm}>Make a Report</Button>
 					</header>
 					{(this.state.showReportForm)
-						? <NewReport 
+						? <NewReport
+								anonymous={this.state.anonymous}
 								sectors={this.state.sectorFromBackEnd} 
 								handleShowReportForm={this.handleShowReportForm} 
 							/>: ''
@@ -164,7 +165,7 @@ class ReporterDashboard extends Component {
 					>My Reports</h3>
 					{/*pass in results from api calls as props to ReportsList comp*/}
 					{(!this.state.loading)
-						? <ReportsList /> : ''
+						? <ReportsList anonymous={this.state.anonymous} /> : ''
 					}
 					
 				</div>
