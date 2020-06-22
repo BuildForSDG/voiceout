@@ -136,3 +136,27 @@ export const getUserReports = () => {
   }
    
 }
+
+export const getSingleReport = (id) => {
+  const getLocalStorage = JSON.parse(localStorage.getItem('response'));
+  if(getLocalStorage && getLocalStorage.token){
+    const token = getLocalStorage.token;
+    return new Promise((resolve, reject) => {
+      fetch('https://voiceout-api.herokuapp.com/api/reports/' + id,
+        { credentials: 'include'},
+        {
+          headers: {
+            "Authorization" : `Bearer ${token}`
+          }
+        }
+      )
+      .then( data => data.json())
+      .then( response => {
+        resolve(response);
+      })
+      .catch(err => {
+        reject(err);
+      })
+    })
+  }
+}

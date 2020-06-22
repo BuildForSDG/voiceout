@@ -34,13 +34,12 @@ class ReportsList extends Component {
 		return (
 			<div>
 				{/*mapping reports from props*/}
-				
 				{	
 					userReports.userReports && userReports.userReports.data.map((data, i) => {
 						return (
 							storageData && storageData.user  ? 
 							<Link key={i} className="links" to={'/report/' + data.id}>
-								<ReportsSummary data={data}/>	
+								<ReportsSummary anonymous={this.props.anonymous} data={data}/>	
 							</Link>
 							:
 							<Link key={i} onClick={this.handleUserNotLoggedIn}>

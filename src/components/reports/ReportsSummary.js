@@ -31,7 +31,18 @@ export default class ReportsSummary extends Component {
 					{date.minutes + " "} 
 					hours
 				</p>				
-				<p className='authorName'>By {data.user.first_name + " " + data.user.last_name}</p>
+				<p className={
+					this.props.anonymous ?
+					'anonymous-yellow': 
+					'authorName'
+				}
+				>By
+					{
+						data.anonymous === 1 ?
+						' Anonymous' :
+						" " + data.user.first_name + " " + data.user.last_name
+					}
+				</p>
 			</div>
 		)
 	}

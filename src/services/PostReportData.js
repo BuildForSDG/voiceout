@@ -15,7 +15,10 @@ const PostReportData = (type, userData, tok) => {
 			state,
 			image,
 			video,
+			anonymous
 		 } = userData;
+		 let anonym = (anonymous) ? 1 : 0;
+		 console.log(anonym);
 		 
 		 const fd = new FormData();
 		 fd.append('title', title);
@@ -26,6 +29,7 @@ const PostReportData = (type, userData, tok) => {
 		 fd.append('sector_id', sector_id);
 		 fd.append('image', image);
 		 fd.append('video', video);
+		 fd.append('anonymous', anonym);
 
 		 Axios.post(url + type, fd, {
 			headers: {
