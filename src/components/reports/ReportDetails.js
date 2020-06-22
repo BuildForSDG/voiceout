@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import { asyncLocalStorage } from '../../services/asyncData';
 import { singleReport } from '../../store/actions/userReportAction';
+import { getSingleReport } from '../../services/getReports'
 import Loading from '../home/Loading';
 import Image from 'react-bootstrap/Image'
 import { dateFromData } from '../../services/dateFromData';
@@ -22,7 +23,8 @@ class ReportDetails extends Component {
 			commentValid: false,
 			upvote: false,
 			downvote: false,
-			returnedComments: ''
+			returnedComments: '',
+			getSingleReport: ''
 		}
 	}
 	componentDidMount(){
@@ -32,6 +34,13 @@ class ReportDetails extends Component {
 		.then(res => {
 			this.setState({
 				returnedComments: res
+			})
+		})
+
+		getSingleReport(params.id)
+		.then(data => {
+			this.setState({
+				getSingleReport: data
 			})
 		})
 
@@ -119,7 +128,10 @@ class ReportDetails extends Component {
 		})
 	}
 	render() {
-		const {oneReport} = this.props;
+		//const oneReport = this.props.oneReport || this.state.getSingleReport;
+		const oneReport = this.props.oneReport.id === this.props.match.params.id ? 
+											this.props.oneReport : 
+											this.state.getSingleReport
 		console.log(oneReport);
 		const data = JSON.parse(localStorage.getItem('response'));
 		if(data && !data.hasOwnProperty('user') ) {return <Redirect to='/' />}

@@ -5,7 +5,7 @@ export const PostComment = (id, comment) => {
 	
 	return new Promise((resolve, reject) => {
     const getLocalStorage = JSON.parse(localStorage.getItem('response'));
-    const token = getLocalStorage.token;
+    const token = getLocalStorage ? getLocalStorage.token : ''
     let tok = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     //const fd = new FormData();
     fetch(url, {
@@ -46,7 +46,7 @@ export const PostComment = (id, comment) => {
 export const GetComments = (id) => {
   return new Promise((resolve, reject) => {
     const getLocalStorage = JSON.parse(localStorage.getItem('response'));
-    const token = getLocalStorage.token;
+    const token = getLocalStorage ? getLocalStorage.token : ''
     let tok = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
     fetch('https://voiceout-api.herokuapp.com/api/reports/'+id+'/comments', {
