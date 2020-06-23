@@ -205,41 +205,50 @@ class Home extends Component {
 					? <NewReport handleShowReportForm={this.handleShowReportForm} />: ''
 				}
 				<div id='search' className="checkbox">
-					<h4>Use the filter below to search for Reports by Sector and by State</h4>
 					<form onSubmit={this.handleSubmit} className="home_checkbox">
-							<label style={{fontSize: '20px'}} for="sector">Select a Sector
-								<span className="required">*</span>
-							</label>
-							<div class='sector-flex-container'>
-								{	this.state.sectorFromBackEnd &&
-									this.state.sectorFromBackEnd.map((data, i) => {
-										return (
-											<div key={i} class='sector-content'>
-												<input type='checkbox' 
-													name={data.name}
-													onChange={this.handleCheckbox} 
-													value={data.id} 
-												/>{" "}
-												<label for={data.name}> {data.name}</label><br />
-											</div>
-										)
-									})
-								}
-							</div>
-							<label style={{fontSize: '20px'}} for="state">Select a State
-								<span className="required">*</span>
-							</label>
-							<select required name="state" value={this.state.state} onChange={this.handleChange}>
-								<option value='' >Select a State</option>
-								
-								{
-									nigerianStates.map((data, i) => {
-										return (
-											<option key={i} value={data}>{data.toUpperCase()}</option>
-										)
-									})									
-								}
-							</select>
+						<h4>Use the filter below to search for Reports by Sector and by State</h4>
+						
+						<label 
+							style={{fontSize: '20px'}} 
+							className='labelHome' 
+							for="sector">Select a Sector
+							<span className="required">*</span>
+						</label>
+						<div class='sector-flex-container'>
+							{	this.state.sectorFromBackEnd &&
+								this.state.sectorFromBackEnd.map((data, i) => {
+									return (
+										<div key={i} class='sector-content'>
+											<input type='checkbox' 
+												name={data.name}
+												onChange={this.handleCheckbox} 
+												value={data.id} 
+											/>{" "}
+											<label 
+												className='inputLabelHome'
+												for={data.name}> {data.name}</label><br />
+										</div>
+									)
+								})
+							}
+						</div>
+						<label 
+							style={{fontSize: '20px'}} 
+							className='labelHome'
+							for="state">Select a State
+							<span className="required">*</span>
+						</label>
+						<select required name="state" value={this.state.state} onChange={this.handleChange}>
+							<option value='' >Select a State</option>
+							
+							{
+								nigerianStates.map((data, i) => {
+									return (
+										<option key={i} value={data}>{data.toUpperCase()}</option>
+									)
+								})									
+							}
+						</select>
 						<div className="text-center">
 							<Button onClick={this.handleSubmit} className="sector_submit">Submit</Button>
 						</div>
