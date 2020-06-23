@@ -5,9 +5,7 @@ export const getReports = (data) => {
   let sectorData;
   if(data){
     const {state, sector_id} = data;
-    console.log(data)
-    if(state === "" && sector_id.length === 0){
-    console.log(sector_id);
+    if(state === "" && sector_id === ""){
       
       return new Promise((resolve, reject) => {
         fetch('https://voiceout-api.herokuapp.com/api/reports', 
@@ -22,7 +20,7 @@ export const getReports = (data) => {
         })
       })
     }
-    else if(state !== "" && sector_id.length !== 0){
+    else if(state !== "" && sector_id !== ""){
       return new Promise((resolve, reject) => {
         fetch('https://voiceout-api.herokuapp.com/api/reports',
           { credentials: 'include'}
@@ -35,7 +33,7 @@ export const getReports = (data) => {
           .filter(eachData => {
             return (
               eachData.sector.length !== 0 ? 
-              eachData.sector[0].id == sector_id[0] : 
+              eachData.sector[0].id == sector_id : 
               ""
             )
           })
@@ -69,19 +67,17 @@ export const getReports = (data) => {
         })
       })
     }
-    else if(sector_id.length !== 0){
-      console.log(sector_id)
+    else if(sector_id !== ""){
       return new Promise((resolve, reject) => {
         fetch('https://voiceout-api.herokuapp.com/api/reports',
           { credentials: 'include'}
         )
         .then( data => data.json())
         .then( data => {
-          console.log(data[80].sector[0].id)
           sectorData = data.filter(eachData => {
             return (
               eachData.sector.length !== 0 ? 
-              eachData.sector[0].id == sector_id[0] : 
+              eachData.sector[0].id == sector_id : 
               ""
             )
           })

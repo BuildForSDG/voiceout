@@ -24,7 +24,7 @@ class Home extends Component {
 			showAnonymousReportForm: false,
 			loading: false,
 			sectorFromBackEnd: '',
-			sector_id: [],
+			sector_id: '',
 			state: '',
 			reports: '',
 			reload: false
@@ -86,7 +86,7 @@ class Home extends Component {
 	}
 
 	handleCheckbox = (e) => {
-		let sector_id = this.state.sector_id;
+		/*let sector_id = this.state.sector_id;
 		let index;
 		if(e.target.checked){
 			sector_id.push(e.target.value);
@@ -94,9 +94,9 @@ class Home extends Component {
 		else{
 			index = sector_id.indexOf(e.target.value);
       sector_id.splice(index, 1);
-		}
+		}*/
 		this.setState({
-			sector_id: sector_id
+			sector_id: e.target.value
 		});
 	}
 
@@ -217,8 +217,8 @@ class Home extends Component {
 								this.state.sectorFromBackEnd.map((data, i) => {
 									return (
 										<div key={i} class='sector-content'>
-											<input type='checkbox' 
-												name={data.name}
+											<input type='radio' 
+												name='sector_id'
 												onChange={this.handleCheckbox} 
 												value={data.id} 
 											/>{" "}
