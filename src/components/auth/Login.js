@@ -85,11 +85,11 @@ class Login extends Component {
 				{(this.state.isLoading) 
 					? <Loading />: ''
 				}
-				<div id="id01" class="modal">
-					<form onSubmit={this.handleSubmit} class="modal-content animate">
+				<div id="id01" className="modal">
+					<form onSubmit={this.handleSubmit} className="modal-content animate">
 		{/*<input type="hidden" name="_token" value={token} />*/}
 						<div class="contain">
-							<span onClick={this.toHome} class="close" title="Close Modal">&times;</span>
+							<span onClick={this.toHome} className="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
 								<p className='submit-error text-center'>
 									{(response.message) ? 'Invalid Login' : ''}

@@ -4,7 +4,6 @@ import BackgroundVideo from '../../images/BriberyVideo.mp4';
 import BackgroundImage from '../../images/bribery-act-1.jpg';
 import '../../style/Home.css';
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
-import Login from '../auth/Login';
 import NewReport from '../reporter/NewReport';
 import { getSectors } from '../../services/getSector';
 import { getReports } from '../../services/getReports';
@@ -12,7 +11,6 @@ import { nigerianStates } from '../reporter/nigerianStates';
 import Loading from './Loading';
 import {asyncLocalStorage} from '../../services/asyncData';
 import {connect} from 'react-redux';
-import SignUp from '../auth/SignUp';
 import { dispatchAllUsersReports } from '../../store/actions/userReportAction';
 //import { firstRow, secondRow, thirdRow } from '../reporter/selectSectorData';
 
@@ -190,13 +188,13 @@ class Home extends Component {
 						notLoading={this.notLoading}
 						loadingClick={this.loading}
 						handleLoginDisplay={this.props.handleLoginDisplay}
-						loginDisappear={this.props.loginDisappear} />: ''*/
+						loginDisappear={this.props.loginDisappear} />: ''
 				}
 				{(this.props.handleDisplayState.signUpDisplay) 
 					? <SignUp
 						notLoading={this.notLoading}
 						loadingClick={this.loading}
-						handleSignUpDisplay={this.props.handleSignUpDisplay} />: ''
+						handleSignUpDisplay={this.props.handleSignUpDisplay} />: ''*/
 				}
 				{(this.state.loading) 
 					? <Loading />: ''

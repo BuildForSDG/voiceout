@@ -11,6 +11,7 @@ import {asyncLocalStorage} from '../../services/asyncData';
 import { getUserReports } from '../../services/getReports';
 import Loading from '../home/Loading';
 import { dispatchUserReports } from '../../store/actions/userReportAction';
+import NoReport from './NoReport';
 
 
 class ReporterDashboard extends Component {
@@ -100,7 +101,7 @@ class ReporterDashboard extends Component {
 		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
 		console.log(getLocalStorage);
 		if(localStorage.getItem('response') == undefined) {return <Redirect to='/' />}
-        const { response } = this.props;
+		const { userReports } = this.props;    
 		if(localStorage.getItem('response') != undefined){
 			//console.log(JSON.parse(localStorage.getItem('response')));
 			const storage = JSON.parse(localStorage.getItem('response'));
@@ -167,7 +168,10 @@ class ReporterDashboard extends Component {
 					{(!this.state.loading)
 						? <ReportsList anonymous={this.state.anonymous} /> : ''
 					}
-					
+					{
+						userReports.userReports && userReports.userReports.data.length == 0 ?
+						<NoReport anonymous={this.state.anonymous}/> : ''
+					}
 				</div>
 			)
 		}
@@ -189,7 +193,8 @@ const mapStateToProps = (state) => {
 	console.log(state)
 	return{
 			response: state.auth.response,
-			reportPost: state.reportPost.response
+			reportPost: state.reportPost.response,
+			userReports: state.userReports,
 	}
 }
 

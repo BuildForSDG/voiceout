@@ -73,13 +73,15 @@ span.psw {
   padding-top: 60px;
 }
 
-.modal-content {
+.modal-content, .modal-content-signup {
   background-color: #fefefe;
   margin: 5% auto 15% auto; 
-  border: 1px solid #888;
+  border: 2px solid #888;
   width: 500px; 
 }
-
+.modal-content-signup {
+  margin: 0 auto 15% auto !important;
+}
 .modal-content-newReport{
   background-color: #fefefe;
   margin:  auto auto auto auto;  
