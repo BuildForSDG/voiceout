@@ -27,14 +27,13 @@ class ReportDetails extends Component {
 			getSingleReport: ''
 		}
 	}
-	componentDidMount(){
+	async componentDidMount(){
 		const { match: { params } } = this.props;
 		
-		GetComments(params.id)
-		.then(res => {
-			this.setState({
-				returnedComments: res
-			})
+		let get = await GetComments(params.id)
+		.then(res => res)
+		this.setState({
+			returnedComments: get
 		})
 
 		getSingleReport(params.id)
@@ -96,6 +95,7 @@ class ReportDetails extends Component {
 		const id = this.props.match.params.id;
 		PostComment(id, this.state.comment)
 		.then((res) => {
+			console.log(res);
 			this.setState({
 				returnedComments: res
 			})
