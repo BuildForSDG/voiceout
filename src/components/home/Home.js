@@ -206,7 +206,7 @@ class Home extends Component {
 				<div id='search' className="checkbox">
 					<h4>Use the filter below to search for Reports by Sector and by State</h4>
 					<form onSubmit={this.handleSubmit} className="home_checkbox">
-							<label for="sector">Select a Sector
+							<label style={{fontSize: '20px'}} for="sector">Select a Sector
 								<span className="required">*</span>
 							</label>
 							<div class='sector-flex-container'>
@@ -218,14 +218,14 @@ class Home extends Component {
 													name={data.name}
 													onChange={this.handleCheckbox} 
 													value={data.id} 
-												/>
+												/>{" "}
 												<label for={data.name}> {data.name}</label><br />
 											</div>
 										)
 									})
 								}
 							</div>
-							<label for="state">Select a State
+							<label style={{fontSize: '20px'}} for="state">Select a State
 								<span className="required">*</span>
 							</label>
 							<select required name="state" value={this.state.state} onChange={this.handleChange}>
