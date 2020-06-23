@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
-import ReportsList from '../reports/ReportsList';
+import BackgroundVideo from '../../images/BriberyVideo.mp4';
+import BackgroundImage from '../../images/bribery-act-1.jpg';
 import '../../style/Home.css';
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
 import Login from '../auth/Login';
@@ -149,7 +150,7 @@ class Home extends Component {
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 		}
 		return (
-			<div className='must-login container'>
+			<div className='homeContainer container'>
 				<div className='error-text'>
 					<p className='submit-error text-center'>
 						{
@@ -159,7 +160,14 @@ class Home extends Component {
 						}
 					</p>
 				</div>
-				<header className='home-header text-center'> 
+				<video 
+					id='bgvideo' autoPlay loop muted 
+					poster={BackgroundImage} 
+					class="fullscreen-bg__video">
+					<source src={BackgroundVideo} type="video/mp4" />
+				</video>
+				<header className='home-header text-center'>
+					<Button><a className='search' href='#search'> Search Report </a></Button>
 					<h2>
 						“The ultimate tragedy is not 
 						the oppression and cruelty by 
@@ -170,6 +178,11 @@ class Home extends Component {
 					{/*
 						<Button onClick={this.handleShowReportForm}>Make a Report</Button>*/
 					}
+					<div id='aboutList'>
+						<p>Are you being <b>Oppressed</b> in one way or the other?</p>
+						<p>Do you have any picture or video evidence?</p>
+						<p>Login to make a <b>Report today</b></p>
+					</div>
 				</header>
 				{/*(this.props.handleDisplayState.loginDisplay) 
 					? <Login 
@@ -190,7 +203,8 @@ class Home extends Component {
 				{(this.state.showAnonymousReportForm)
 					? <NewReport handleShowReportForm={this.handleShowReportForm} />: ''
 				}
-				<div className="checkbox">
+				<div id='search' className="checkbox">
+					<h4>Use the filter below to search for Reports by Sector and by State</h4>
 					<form onSubmit={this.handleSubmit} className="home_checkbox">
 							<label for="sector">Select a Sector
 								<span className="required">*</span>

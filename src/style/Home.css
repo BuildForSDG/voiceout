@@ -5,15 +5,25 @@ h2{
 	font-weight: bold;
 }
 header.home-header{
-	padding-top: 100px !important;
-	padding: 100px;
+	margin-top: 50px;
+	padding: 50px;
 	line-height: 100px;
+	color: #444;
+	background-color: rgb(255, 255, 255, 0.7);
+}
+a.search{
+	text-decoration: none;
+	color: #fff;
 }
 div.checkbox{
+	color: #000;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	border-radius: 10px;
+	margin-top: 60px;
+	padding: 60px;
+	background-color: rgb(255, 255, 255, 0.7);
 }
 div.checkbox > form{
   width: 500px;
@@ -48,8 +58,15 @@ button.sector_submit {
 .searched-reports-div{
 	padding-top: 100px;
 }
-.must-login, div.singleReport-body{
-	padding-top: 100px;
+.homeContainer, div.singleReport-body{
+	padding-top: 50px;
+}
+#aboutList{
+	margin: auto;
+	line-height: 50px;
+	max-width: 70%;
+	text-align: left !important;
+	font-size: 18px;
 }
 .time{
 	color: rgb(248, 85, 85)
@@ -89,9 +106,23 @@ div.returned-comments{
 .smaller-letter{
 	font-size: 12px;
 }
+#bgvideo{
+	position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+	min-height: 100%;
+	z-index: -100;
+}
 
 @media only screen and (max-width: 765px) {
   div.singleReport{
 		width: 100%;
+	}
+	#video1{
+		width: 100%;
+	}
+	#aboutList{
+		max-width: 100%;
 	}
 }
