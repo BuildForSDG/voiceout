@@ -110,7 +110,7 @@ class ReporterDashboard extends Component {
 					'anonymous text-center':
 					'text-center'
 				}>
-					<header className='home-header text-center'>
+					<header className='reporter-header text-center'>
 					<Button 
 						className={
 							this.state.anonymous?

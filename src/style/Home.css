@@ -6,10 +6,14 @@ h2{
 }
 header.home-header{
 	margin-top: 50px;
-	padding: 50px;
+	padding: 40px;
 	line-height: 100px;
+	border-radius: 10px;
 	color: #444;
 	background-color: rgb(255, 255, 255, 0.7);
+}
+header.reporter-header{
+	padding: 80px;
 }
 a.search{
 	text-decoration: none;
@@ -58,7 +62,8 @@ button.sector_submit {
 .searched-reports-div{
 	padding-top: 100px;
 }
-.homeContainer, div.singleReport-body{
+
+.homeContainer{
 	padding-top: 50px;
 }
 #aboutList{

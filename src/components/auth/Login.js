@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../../style/Form.css';
 import { login } from '../../store/actions/authAction';
 import {Redirect} from 'react-router-dom';
+import BackgroundVideo from '../../images/BriberyVideo.mp4';
+import BackgroundImage from '../../images/bribery-act-1.jpg';
 import { connect } from 'react-redux';
 import Loading from '../home/Loading';
 
@@ -74,6 +76,12 @@ class Login extends Component {
 		}
 		return (
 			<div>
+				<video 
+					id='bgvideo' autoPlay loop muted 
+					poster={BackgroundImage} 
+					class="fullscreen-bg__video">
+					<source src={BackgroundVideo} type="video/mp4" />
+				</video>
 				{(this.state.isLoading) 
 					? <Loading />: ''
 				}
