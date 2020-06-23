@@ -11,7 +11,7 @@ export default class SignedOutLinks extends Component {
 		return (
 			<Nav className="ml-auto">
 				<Nav.Link href="#home">
-					<Link onClick={this.props.handleSignUpDisplay} className="links">Sign Up</Link>
+					<Link onClick={this.props.handleSignUpDisplay} to='sign-up' className="links">Sign Up</Link>
 				</Nav.Link>
 				<Nav.Link href="#link">
 					<Link onClick={this.props.handleLoginDisplay} to="/login" className="links">Login</Link>

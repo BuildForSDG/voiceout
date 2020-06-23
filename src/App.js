@@ -12,6 +12,7 @@ import InstitutionDashboard from './components/institution/InstitutionDashboard'
 import ReportDetails from './components/reports/ReportDetails';
 import SearchedReports from './components/home/SearchedReports';
 import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
 
 class App extends Component{
   constructor(props){
@@ -24,7 +25,7 @@ class App extends Component{
   }
   handleSignUpDisplay = () => {
 		this.setState({
-			signUpDisplay: !this.state.signUpDisplay
+			signUpDisplay: true
 		})
   }
   signUpDisappear = () => {
@@ -85,6 +86,21 @@ class App extends Component{
                   handleDisplayState={this.state}
                   handleSignUpDisplay={this.handleSignUpDisplay}
                   loginDisappear={this.loginDisappear}/>
+              }
+            />
+            <Route
+              path='/sign-up'
+              component={() => 
+                //when the when loginDisplay is set to true, it remains true even when you logout
+                /* passing this props will ensure the loginDisplay returns false a s a the reporter
+                dashbord loads*/
+                <SignUp 
+                  handleLoginDisplay={this.handleLoginDisplay}
+                  handleDisplayState={this.state}
+                  handleSignUpDisplay={this.handleSignUpDisplay}
+                  loginDisappear={this.loginDisappear}
+                  signUpDisappear={this.signUpDisappear}
+                  />
               }
             />
             <Route

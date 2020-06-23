@@ -4,6 +4,7 @@ import { login, signUp } from '../../store/actions/authAction';
 import FormErrors from '../reporter/FormError';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
+import Loading from '../home/Loading';
 
 class SignUp extends Component {
 	constructor(props){
@@ -20,7 +21,8 @@ class SignUp extends Component {
       validLastName: false,
       validConfirmPassword: false,
       submitError: '',
-      formValid: false,
+			formValid: false,
+			cancel: false,
 			reportFormError: {
 				email: '',
         password: '',
@@ -109,24 +111,35 @@ class SignUp extends Component {
       this.props.signUp(this.state)
     }
 		
-		this.props.loadingClick();
+		this.setState({
+			isLoading: true
+		});
+	}
+	toHome = () => {
+		this.setState({
+			cancel: true
+		})
 	}
 
 	render() {
 		//console.log(this.state.isLoading)
+		if(this.state.cancel){ return <Redirect to='/' /> }
 		const { response } = this.props;
-		if(response !== '') {this.props.notLoading()};
+		//if(response !== '') {this.props.notLoading()};
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 			if (localStorageNotUndefined) return <Redirect to='/reporter' />
 		}
 		return (
 			<div>
-				<div id="id01" class="modal">
-					<form onSubmit={this.handleSubmit} class="modal-content animate">
+				{(this.state.isLoading) 
+					? <Loading />: ''
+				}
+				<div id="id01" className="modal">
+					<form onSubmit={this.handleSubmit} className="modal-content-signup animate">
 		{/*<input type="hidden" name="_token" value={token} />*/}
 						<div class="contain">
-							<span onClick={this.props.handleSignUpDisplay} class="close" title="Close Modal">&times;</span>
+							<span onClick={this.toHome} className="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
 								<p className='submit-error text-center'>
 								{(response.message) ? 'Email already exists' : ''}

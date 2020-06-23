@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
-import ReportsList from '../reports/ReportsList';
+import BackgroundVideo from '../../images/BriberyVideo.mp4';
+import BackgroundImage from '../../images/bribery-act-1.jpg';
 import '../../style/Home.css';
 import { Button, Navbar, Nav, Container } from 'react-bootstrap';
-import Login from '../auth/Login';
 import NewReport from '../reporter/NewReport';
 import { getSectors } from '../../services/getSector';
 import { getReports } from '../../services/getReports';
@@ -11,7 +11,6 @@ import { nigerianStates } from '../reporter/nigerianStates';
 import Loading from './Loading';
 import {asyncLocalStorage} from '../../services/asyncData';
 import {connect} from 'react-redux';
-import SignUp from '../auth/SignUp';
 import { dispatchAllUsersReports } from '../../store/actions/userReportAction';
 //import { firstRow, secondRow, thirdRow } from '../reporter/selectSectorData';
 
@@ -149,17 +148,25 @@ class Home extends Component {
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 		}
 		return (
-			<div className='must-login container'>
-				<div className='error-text'>
-					<p className='submit-error text-center'>
-						{
-							localStorage.getItem('notLoggedInMessage') !== null ? 
-							"You must login to view reports in details" : 
-							""
-						}
-					</p>
-				</div>
-				<header className='home-header text-center'> 
+			<div className='homeContainer container'>
+				<video 
+					id='bgvideo' autoPlay loop muted 
+					poster={BackgroundImage} 
+					class="fullscreen-bg__video">
+					<source src={BackgroundVideo} type="video/mp4" />
+				</video>
+				
+				<header className='home-header text-center'>
+					<div className='error-text'>
+						<p className='submit-error text-center'>
+							{
+								localStorage.getItem('notLoggedInMessage') !== null ? 
+								"You must login to view reports in details" : 
+								""
+							}
+						</p>
+					</div>
+					<Button><a className='search' href='#search'> Search Report </a></Button>
 					<h2>
 						“The ultimate tragedy is not 
 						the oppression and cruelty by 
@@ -170,19 +177,24 @@ class Home extends Component {
 					{/*
 						<Button onClick={this.handleShowReportForm}>Make a Report</Button>*/
 					}
+					<div id='aboutList'>
+						<p>Are you being <b>Oppressed</b> in one way or the other?</p>
+						<p>Do you have any picture or video evidence?</p>
+						<p>Login to make a <b>Report today</b></p>
+					</div>
 				</header>
 				{/*(this.props.handleDisplayState.loginDisplay) 
 					? <Login 
 						notLoading={this.notLoading}
 						loadingClick={this.loading}
 						handleLoginDisplay={this.props.handleLoginDisplay}
-						loginDisappear={this.props.loginDisappear} />: ''*/
+						loginDisappear={this.props.loginDisappear} />: ''
 				}
 				{(this.props.handleDisplayState.signUpDisplay) 
 					? <SignUp
 						notLoading={this.notLoading}
 						loadingClick={this.loading}
-						handleSignUpDisplay={this.props.handleSignUpDisplay} />: ''
+						handleSignUpDisplay={this.props.handleSignUpDisplay} />: ''*/
 				}
 				{(this.state.loading) 
 					? <Loading />: ''
@@ -190,41 +202,51 @@ class Home extends Component {
 				{(this.state.showAnonymousReportForm)
 					? <NewReport handleShowReportForm={this.handleShowReportForm} />: ''
 				}
-				<div className="checkbox">
+				<div id='search' className="checkbox">
 					<form onSubmit={this.handleSubmit} className="home_checkbox">
-							<label for="sector">Select a Sector
-								<span className="required">*</span>
-							</label>
-							<div class='sector-flex-container'>
-								{	this.state.sectorFromBackEnd &&
-									this.state.sectorFromBackEnd.map((data, i) => {
-										return (
-											<div key={i} class='sector-content'>
-												<input type='checkbox' 
-													name={data.name}
-													onChange={this.handleCheckbox} 
-													value={data.id} 
-												/>
-												<label for={data.name}> {data.name}</label><br />
-											</div>
-										)
-									})
-								}
-							</div>
-							<label for="state">Select a State
-								<span className="required">*</span>
-							</label>
-							<select required name="state" value={this.state.state} onChange={this.handleChange}>
-								<option value='' >Select a State</option>
-								
-								{
-									nigerianStates.map((data, i) => {
-										return (
-											<option key={i} value={data}>{data.toUpperCase()}</option>
-										)
-									})									
-								}
-							</select>
+						<h4>Use the filter below to search for Reports by Sector and by State</h4>
+						
+						<label 
+							style={{fontSize: '20px'}} 
+							className='labelHome' 
+							for="sector">Select a Sector
+							<span className="required">*</span>
+						</label>
+						<div class='sector-flex-container'>
+							{	this.state.sectorFromBackEnd &&
+								this.state.sectorFromBackEnd.map((data, i) => {
+									return (
+										<div key={i} class='sector-content'>
+											<input type='checkbox' 
+												name={data.name}
+												onChange={this.handleCheckbox} 
+												value={data.id} 
+											/>{" "}
+											<label 
+												className='inputLabelHome'
+												for={data.name}> {data.name}</label><br />
+										</div>
+									)
+								})
+							}
+						</div>
+						<label 
+							style={{fontSize: '20px'}} 
+							className='labelHome'
+							for="state">Select a State
+							<span className="required">*</span>
+						</label>
+						<select required name="state" value={this.state.state} onChange={this.handleChange}>
+							<option value='' >Select a State</option>
+							
+							{
+								nigerianStates.map((data, i) => {
+									return (
+										<option key={i} value={data}>{data.toUpperCase()}</option>
+									)
+								})									
+							}
+						</select>
 						<div className="text-center">
 							<Button onClick={this.handleSubmit} className="sector_submit">Submit</Button>
 						</div>
