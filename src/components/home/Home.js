@@ -151,22 +151,23 @@ class Home extends Component {
 		}
 		return (
 			<div className='homeContainer container'>
-				<div className='error-text'>
-					<p className='submit-error text-center'>
-						{
-							localStorage.getItem('notLoggedInMessage') !== null ? 
-							"You must login to view reports in details" : 
-							""
-						}
-					</p>
-				</div>
 				<video 
 					id='bgvideo' autoPlay loop muted 
 					poster={BackgroundImage} 
 					class="fullscreen-bg__video">
 					<source src={BackgroundVideo} type="video/mp4" />
 				</video>
+				
 				<header className='home-header text-center'>
+					<div className='error-text'>
+						<p className='submit-error text-center'>
+							{
+								localStorage.getItem('notLoggedInMessage') !== null ? 
+								"You must login to view reports in details" : 
+								""
+							}
+						</p>
+					</div>
 					<Button><a className='search' href='#search'> Search Report </a></Button>
 					<h2>
 						“The ultimate tragedy is not 
