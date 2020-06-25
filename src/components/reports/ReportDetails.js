@@ -156,6 +156,7 @@ class ReportDetails extends Component {
 											this.state.getSingleReport
 		console.log(oneReport);
 		const data = JSON.parse(localStorage.getItem('response'));
+		const localStorageUser = data.user ? data.user : ''
 		if(data && !data.hasOwnProperty('user') ) {return <Redirect to='/' />}
 		if(data == undefined){ return <Redirect to='/' />}
 		if(oneReport && oneReport.id == this.props.match.params.id){
@@ -246,7 +247,11 @@ class ReportDetails extends Component {
 								</i>
 							}
 							<span> {this.state.downvotes} </span>
-							<Button onClick={this.handleShowSharePage}>Share</Button>
+							{
+								localStorageUser && localStorageUser.id === oneReport.user.id ?
+								<Button onClick={this.handleShowSharePage}>Share</Button> :
+								''
+							}
 						</div>
 						<hr/>
 						<div className='commentReport'>
