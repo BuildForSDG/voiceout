@@ -10,6 +10,9 @@ import { dateFromData } from '../../services/dateFromData';
 import {PostComment, GetComments} from '../../services/postComment';
 import { upvote, downvote } from '../../services/votes';
 import { getVotes } from '../../services/getVotes';
+import SharePost from './SharePost';
+import { Button } from 'react-bootstrap';
+import { getVoices } from '../../services/getVoices';
 
 
 class ReportDetails extends Component {
@@ -24,7 +27,9 @@ class ReportDetails extends Component {
 			upvote: false,
 			downvote: false,
 			returnedComments: '',
-			getSingleReport: ''
+			getSingleReport: '',
+			showSharePage: false,
+			voices: ''
 		}
 	}
 	async componentDidMount(){
@@ -36,12 +41,22 @@ class ReportDetails extends Component {
 			returnedComments: get
 		})
 
-		getSingleReport(params.id)
-		.then(data => {
+		getVoices()
+		.then(res => {
 			this.setState({
-				getSingleReport: data
+				voices: res
 			})
 		})
+
+		if(localStorage.getItem('response')){
+			getSingleReport(params.id)
+			.then(data => {
+				this.setState({
+					getSingleReport: data
+				})
+			})	
+		}
+		
 
 		const {userReports} = this.props;
 		const data = JSON.parse(localStorage.getItem('response'));
@@ -127,6 +142,13 @@ class ReportDetails extends Component {
 			})
 		})
 	}
+
+	handleShowSharePage = () => {
+    this.setState({
+			showSharePage: !this.state.showSharePage
+		})
+	}
+	
 	render() {
 		//const oneReport = this.props.oneReport || this.state.getSingleReport;
 		const oneReport = this.props.oneReport.id === this.props.match.params.id ? 
@@ -140,6 +162,13 @@ class ReportDetails extends Component {
 			const date = dateFromData(oneReport);
 			return (
 				<div className='container singleReport-body'>
+					{
+						this.state.showSharePage ?
+						<SharePost
+							id={this.props.match.params.id}
+							voices={this.state.voices}
+							handleShowSharePage={this.handleShowSharePage} /> : ''
+					}
 					<div class='singleReport'>
 						<h1>{oneReport.title}</h1>
 						<figure className='inside-flex'>
@@ -180,7 +209,7 @@ class ReportDetails extends Component {
 						<p className='small-letter'>Sector: {
 							oneReport.sector.map((data, i) => {
 								return (
-									<span key={i}>{data.name}</span>
+									<span key={i}> {" " + data.name}, </span>
 								)
 							})
 						}</p>
@@ -217,7 +246,8 @@ class ReportDetails extends Component {
 								</i>
 							}
 							<span> {this.state.downvotes} </span>
-							</div>
+							<Button onClick={this.handleShowSharePage}>Share</Button>
+						</div>
 						<hr/>
 						<div className='commentReport'>
 							<label>Comments</label>

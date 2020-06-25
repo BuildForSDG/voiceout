@@ -38,6 +38,9 @@ export const signUp = (data) => {
 			if(response.user){
 				return PostData('login', data)
 			}
+			else{
+				return 'Email Already in use';
+			}
 		})
 		.then((response) => {
 			asyncLocalStorage.setItem('response', response);

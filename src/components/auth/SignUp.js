@@ -33,7 +33,8 @@ class SignUp extends Component {
 			isLoading: false,
 			isValid: false,
 			redirect: false,
-			validLogin: true
+			validLogin: true,
+			reupdate: true
 		}
 
 	}
@@ -94,7 +95,15 @@ class SignUp extends Component {
 				&& this.state.validConfirmPassword
 		})
 	}
-  
+  componentDidUpdate(){
+		if(this.props.response === 'Email Already in use' && this.state.reupdate){
+			this.setState({
+				isLoading: false,
+				reupdate: false
+			})
+		}
+	}
+
   handleChange = (e) => {
 		let name = e.target.name;
 		let value = e.target.value;
@@ -125,6 +134,7 @@ class SignUp extends Component {
 		//console.log(this.state.isLoading)
 		if(this.state.cancel){ return <Redirect to='/' /> }
 		const { response } = this.props;
+		console.log(response);
 		//if(response !== '') {this.props.notLoading()};
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
@@ -142,7 +152,7 @@ class SignUp extends Component {
 							<span onClick={this.toHome} className="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
 								<p className='submit-error text-center'>
-								{(response.message) ? 'Email already exists' : ''}
+								{(response === 'Email Already in use') ? response : ''}
 								</p>
               </div>
               <div className='error-text'>
