@@ -213,6 +213,16 @@ class Home extends Component {
 							<span className="required">*</span>
 						</label>
 						<div class='sector-flex-container'>
+							<div class='sector-content'>
+								<input type='radio' 
+									name='sector_id'
+									onChange={this.handleCheckbox} 
+									value='' 
+								/>{" "}
+								<label 
+									className='inputLabelHome'
+									for='all'> All </label><br />
+							</div>
 							{	this.state.sectorFromBackEnd &&
 								this.state.sectorFromBackEnd.map((data, i) => {
 									return (
@@ -238,6 +248,7 @@ class Home extends Component {
 						</label>
 						<select required name="state" value={this.state.state} onChange={this.handleChange}>
 							<option value='' >Select a State</option>
+							<option value=''> All </option>
 							
 							{
 								nigerianStates.map((data, i) => {
