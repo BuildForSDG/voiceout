@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PostEmail from '../../services/postEmail';
 
 export default class SharePost extends Component {
   constructor(props){
@@ -7,7 +8,9 @@ export default class SharePost extends Component {
     this.state = {
       voiceValid: false,
       voice_id: [],
-      formErrorMessage: ''
+      formErrorMessage: '',
+      showMessage: false,
+      message: ''
     }
   }
 
@@ -46,6 +49,16 @@ export default class SharePost extends Component {
         formErrorMessage: 'You need to check at least one box'
       })
     }
+    else{
+      PostEmail(this.props.id, this.state)
+      .then( response => {
+        this.setState({
+          'message': response.message,
+          'showMessage': true
+        })
+        console.log(response);
+      })
+    }
 
   }
   render() {
@@ -60,6 +73,13 @@ export default class SharePost extends Component {
                 <p className='submit-error text-center'>
                   {
                     this.state.formErrorMessage
+                  }
+                </p>
+              </div>
+              <div className='success-text'>
+                <p className='text-center'>
+                  {
+                    this.state.message
                   }
                 </p>
               </div>
