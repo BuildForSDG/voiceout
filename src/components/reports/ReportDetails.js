@@ -13,6 +13,8 @@ import { getVotes } from '../../services/getVotes';
 import SharePost from './SharePost';
 import { Button } from 'react-bootstrap';
 import { getVoices } from '../../services/getVoices';
+import Votes from './Votes';
+import Comments from './Comments';
 
 
 class ReportDetails extends Component {
@@ -46,16 +48,32 @@ class ReportDetails extends Component {
 			this.setState({
 				voices: res
 			})
-		})
+		});
 
-		if(localStorage.getItem('response')){
-			getSingleReport(params.id)
-			.then(data => {
-				this.setState({
-					getSingleReport: data
-				})
-			})	
-		}
+		//work with facebook share button
+		const urlAddress = "https://voiceout.netlify.app/report/" + params.id
+		const url = document.createElement("meta");
+		document.head.appendChild(url);
+		const description = document.createElement("meta");
+		document.head.appendChild(description);
+		const image = document.createElement("meta");
+		document.head.appendChild(image);
+		
+
+		getSingleReport(params.id)
+		.then(data => {
+			//facebook share
+			url.setAttribute("property", "og:url");
+			url.setAttribute("content", urlAddress);
+			description.setAttribute("property", "og:description");
+			description.setAttribute("content", data.title);
+			image.setAttribute("property", "og:image");
+			image.setAttribute("content", data.media_url.images[0]);
+			console.log(data);
+			this.setState({
+				getSingleReport: data
+			})
+		})	
 		
 
 		const {userReports} = this.props;
@@ -151,14 +169,16 @@ class ReportDetails extends Component {
 	
 	render() {
 		//const oneReport = this.props.oneReport || this.state.getSingleReport;
-		const oneReport = this.props.oneReport.id === this.props.match.params.id ? 
-											this.props.oneReport : 
-											this.state.getSingleReport
-		console.log(oneReport);
+		let oneReport;
 		const data = JSON.parse(localStorage.getItem('response'));
-		const localStorageUser = data.user ? data.user : ''
-		if(data && !data.hasOwnProperty('user') ) {return <Redirect to='/' />}
-		if(data == undefined){ return <Redirect to='/' />}
+		const localStorageUser = data && data.user ? data.user : '';
+		if(data && !data.hasOwnProperty('user') ) {
+			oneReport = this.props.oneReport.id === this.props.match.params.id ? 
+									this.props.oneReport : 
+									this.state.getSingleReport
+		}
+		oneReport = this.state.getSingleReport;
+		//if(data == undefined){ return <Redirect to='/' />}
 		if(oneReport && oneReport.id == this.props.match.params.id){
 			const date = dateFromData(oneReport);
 			return (
@@ -172,25 +192,31 @@ class ReportDetails extends Component {
 					}
 					<div class='singleReport'>
 						<h1>{oneReport.title}</h1>
-						<figure className='inside-flex'>
-							<Image 
-								src={
-									(oneReport.media_url.images) ? 
-									oneReport.media_url.images : 
-									"https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1"
-								}
-								fluid
-							/>
-							<figcaption>{oneReport.title}</figcaption>
-						</figure>
-						{
-							oneReport.media_url.videos ? 
-							<video id="video1" height="300" width="420" controls>
-								<source src={oneReport.media_url.videos}/>
-								Your browser does not support HTML video.
-							</video>
-							:''
-						}
+						<div className='media'>
+							<figure className='inside-flex detail-flex'>
+								<Image
+									className='detail-image'
+									src={
+										(oneReport.media_url.images) ? 
+										oneReport.media_url.images : 
+										"https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1"
+									}
+									fluid
+								/>
+								<figcaption>{oneReport.title}</figcaption>
+							</figure>
+						</div>
+						<div className='media'>
+							{
+								oneReport.media_url.videos ? 
+								<video id="video1" height="300" width="420" controls>
+									<source src={oneReport.media_url.videos}/>
+									Your browser does not support HTML video.
+								</video>
+								:''
+							}
+						</div>
+						
 						<p className='time small-letter'>Reported on {date.days[date.day]}, 
 							{" " + date.date} - 
 							{date.months[date.month]} - 
@@ -216,82 +242,30 @@ class ReportDetails extends Component {
 						}</p>
 						<p className='small-letter'>Location: {oneReport.address}</p>
 						<p className='small-letter'>State: {oneReport.state}</p>
-						<div className='votes'>
-							{
-								this.state.upvote ? 
-								<i
-									onClick={this.upvote}
-									style={{color: '#4287f5'}} 
-									className='material-icons'>
-										thumb_up
-								</i> :
-								<i
-									onClick={this.upvote}
-									className='material-icons'>
-										thumb_up
-								</i>
-							}
-							<span> {this.state.upvotes} </span>
-							{
-								this.state.downvote ? 
-								<i
-									onClick={this.downvote}
-									style={{color: '#4287f5'}} 
-									className='material-icons'>
-										thumb_down
-								</i> :
-								<i
-									onClick={this.downvote}
-									className='material-icons'>
-										thumb_down
-								</i>
-							}
-							<span> {this.state.downvotes} </span>
-							{
-								localStorageUser && localStorageUser.id === oneReport.user.id ?
-								<Button onClick={this.handleShowSharePage}>Share</Button> :
-								''
-							}
-						</div>
-						<hr/>
-						<div className='commentReport'>
-							<label>Comments</label>
-								<div className='returned-comments'>
-									{
-										this.state.returnedComments &&
-										this.state.returnedComments.map((data, i) => {
-											const date = dateFromData(data);
-											return (
-												<div key={i}>
-													<p className='comment-description'>{data.description}</p>
-													<p className='comment-author'>Author - {data.user.first_name + ' ' + data.user.last_name}</p>
-													<p className='time smaller-letter'>Commented on {date.days[date.day]}, 
-														{" " + date.date} - 
-														{date.months[date.month]} - 
-														{date.year + " "} at
-														{" " + date.hours}: 
-														{date.minutes + " "} 
-														hours
-													</p>
-													<hr />
-												</div>
-											)
-										})
-									}
-								</div>
-							<form onSubmit={this.handleSubmit}>
-								<textarea
-									placeholder='Add your comments here'
-									name='comment'
-									cols="30" 
-									rows="10" 
-									className="textarea" 
-									onChange={this.handleChange}
-									value={this.state.comment}>
-								</textarea>
-								<button type='submit' className="btn btn-primary">Add Comment</button>
-							</form>
-						</div>
+						{
+							localStorageUser ?
+							<div>
+								<Votes
+									id={this.props.match.params.id}
+									handleShowSharePage={this.handleShowSharePage}
+									oneReport={oneReport}
+									stateUpvote={this.state.upvote}
+									stateUpvotes={this.state.upvotes}
+									upvoteFunction={this.upvote}
+									stateDownvote={this.state.downvote}
+									stateDownvotes={this.state.downvotes}
+									downvoteFunction={this.downvote}
+									/>
+								<hr/>
+								<Comments 
+									returnedComments={this.state.returnedComments}
+									handleSubmit={this.handleSubmit}
+									handleChange={this.handleChange}
+									comments={this.state.comments}
+								/>
+							</div> : 
+							''
+						}
 					</div>
 				</div>
 			)
