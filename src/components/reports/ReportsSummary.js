@@ -11,41 +11,39 @@ export default class ReportsSummary extends Component {
 		const date = dateFromData(data);
 		return (
 			<div className='report-summary'>
-				<div className='h text-center'>
-					<figure className='inside-flex summary-flex'>
-						<Image
-							className='summary-image'
-							src={
-								(data.media_url.images) ? 
-								data.media_url.images : 
-								"https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1"
-							}
-							fluid
-						/>
-						<figcaption>{data.title}</figcaption>
-					</figure>
-					<br />
-					<p className='time'>Reported on {date.days[date.day]}, 
-						{" " + date.date} - 
-						{date.months[date.month]} - 
-						{date.year + " "} at
-						{" " + date.hours}: 
-						{date.minutes + " "} 
-						hours
-					</p>				
-					<p className={
-						this.props.anonymous ?
-						'anonymous-yellow': 
-						'authorName'
-					}
-					>By
-						{
-							data.anonymous === 1 ?
-							' Anonymous' :
-							" " + data.user.first_name + " " + data.user.last_name
+				<figure className='inside-flex summary-flex'>
+					<Image
+						className='summary-image'
+						src={
+							(data.media_url.images) ? 
+							data.media_url.images : 
+							"https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1"
 						}
-					</p>
-				</div>
+						fluid
+					/>
+					<figcaption>{data.title}</figcaption>
+				</figure>
+				<br />
+				<p className='time'>Reported on {date.days[date.day]}, 
+					{" " + date.date} - 
+					{date.months[date.month]} - 
+					{date.year + " "} at
+					{" " + date.hours}: 
+					{date.minutes + " "} 
+					hours
+				</p>				
+				<p className={
+					this.props.anonymous ?
+					'anonymous-yellow': 
+					'authorName'
+				}
+				>By
+					{
+						data.anonymous === 1 ?
+						' Anonymous' :
+						" " + data.user.first_name + " " + data.user.last_name
+					}
+				</p>
 			</div>
 		)
 	}

@@ -53,11 +53,9 @@ class ReportDetails extends Component {
 		//work with facebook share button
 		const urlAddress = "https://voiceout.netlify.app/report/" + params.id
 		const url = document.createElement("meta");
-		document.head.appendChild(url);
 		const description = document.createElement("meta");
-		document.head.appendChild(description);
 		const image = document.createElement("meta");
-		document.head.appendChild(image);
+		
 		
 
 		getSingleReport(params.id)
@@ -65,10 +63,13 @@ class ReportDetails extends Component {
 			//facebook share
 			url.setAttribute("property", "og:url");
 			url.setAttribute("content", urlAddress);
+			document.head.appendChild(url);
 			description.setAttribute("property", "og:description");
 			description.setAttribute("content", data.title);
+			document.head.appendChild(description);
 			image.setAttribute("property", "og:image");
 			image.setAttribute("content", data.media_url.images[0]);
+			document.head.appendChild(image);
 			console.log(data);
 			this.setState({
 				getSingleReport: data
@@ -192,31 +193,32 @@ class ReportDetails extends Component {
 					}
 					<div class='singleReport'>
 						<h1>{oneReport.title}</h1>
-						<div className='media'>
-							<figure className='inside-flex detail-flex'>
-								<Image
-									className='detail-image'
-									src={
-										(oneReport.media_url.images) ? 
-										oneReport.media_url.images : 
-										"https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1"
-									}
-									fluid
-								/>
-								<figcaption>{oneReport.title}</figcaption>
-							</figure>
+						<div className='media-parent'>
+							<div className='media'>
+								<figure className='detail-flex'>
+									<Image
+										className='detail-image'
+										src={
+											(oneReport.media_url.images) ? 
+											oneReport.media_url.images : 
+											"https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1"
+										}
+										fluid
+									/>
+									<figcaption>{oneReport.title}</figcaption>
+								</figure>
+							</div>
+							<div className='media'>
+								{
+									oneReport.media_url.videos ? 
+									<video id="video1" height="300" controls>
+										<source src={oneReport.media_url.videos}/>
+										Your browser does not support HTML video.
+									</video>
+									:''
+								}
+							</div>
 						</div>
-						<div className='media'>
-							{
-								oneReport.media_url.videos ? 
-								<video id="video1" height="300" width="420" controls>
-									<source src={oneReport.media_url.videos}/>
-									Your browser does not support HTML video.
-								</video>
-								:''
-							}
-						</div>
-						
 						<p className='time small-letter'>Reported on {date.days[date.day]}, 
 							{" " + date.date} - 
 							{date.months[date.month]} - 

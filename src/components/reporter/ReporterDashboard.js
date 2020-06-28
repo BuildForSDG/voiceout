@@ -112,19 +112,19 @@ class ReporterDashboard extends Component {
 					'text-center'
 				}>
 					<header className='reporter-header text-center'>
-					<Button 
-						className={
-							this.state.anonymous?
-							'anonymous-yellow':
-							''
-						} 
-						onClick={this.handleAnonymousToggle}>
-						{
-							this.state.anonymous ?
-							'Go Visible':
-							'Go Anonymous'
-						}
-					</Button>
+						<Button 
+							className={
+								this.state.anonymous?
+								'anonymous-yellow':
+								''
+							} 
+							onClick={this.handleAnonymousToggle}>
+							{
+								this.state.anonymous ?
+								'Go Visible':
+								'Go Anonymous'
+							}
+						</Button>
 						<h1>Welcome 
 							<span 
 								className={
