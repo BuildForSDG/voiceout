@@ -77,6 +77,7 @@ class ReportsList extends Component {
 					<Button onClick={this.sortByDate} style={{margin: '10px'}}>Sort By Date</Button>
 					<Button onClick={this.sortByVotes} style={{margin: '10px'}}>Sort By Upvotes</Button>
 				</div>
+				
 				{/*mapping reports from props*/}
 				{	
 					returnedReports && returnedReports.data.map((data, i) => {
