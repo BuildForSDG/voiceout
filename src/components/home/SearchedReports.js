@@ -5,7 +5,10 @@ import {connect} from 'react-redux';
 import Loading from './Loading';
 
 class SearchedReports extends Component {
+  constructor(props){
+    super(props);
 
+  }
 
   componentDidMount(){
     this.props.dispatchAllUsersReports()
@@ -25,7 +28,10 @@ class SearchedReports extends Component {
               }
             </h1>
             <div >
-              <ReportsList />
+              <ReportsList
+                sortByDate={this.sortByDate}
+                sortByUpvotes={this.sortByVotes}
+              />
               <h3>
                 {
                   (userReportsState.userReports.data.length === 0) ? 
