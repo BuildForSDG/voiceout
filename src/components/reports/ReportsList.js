@@ -60,14 +60,14 @@ class ReportsList extends Component {
 		let returnedReports = userReports;
 		console.log(userReports);
 		if(this.state.sortByVotes){
-			returnedReports.data.sort((a, b) => {
+			returnedReports && returnedReports.data.sort((a, b) => {
 				return (b.upvoted.length - a.upvoted.length)
 			})
 			console.log(returnedReports);
 			console.log(userReports)
 		}
 		if(this.state.sortByDate){
-			returnedReports.data.sort(this.compareSort)
+			returnedReports && returnedReports.data.sort(this.compareSort)
 			console.log(userReports)
 		}
 		const storageData = JSON.parse(localStorage.getItem('response'));
@@ -77,7 +77,7 @@ class ReportsList extends Component {
 					<Button onClick={this.sortByDate} style={{margin: '10px'}}>Sort By Date</Button>
 					<Button onClick={this.sortByVotes} style={{margin: '10px'}}>Sort By Upvotes</Button>
 				</div>
-				
+
 				{/*mapping reports from props*/}
 				{	
 					returnedReports && returnedReports.data.map((data, i) => {
