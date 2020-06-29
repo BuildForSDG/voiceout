@@ -46,6 +46,9 @@ class ReporterDashboard extends Component {
 		return comparison;
 	}
 	componentDidMount(){
+		this.setState({
+			anonymous: JSON.parse(localStorage.getItem('anonymous'))
+		})
 		if(this.state.sectorFromBackEnd === ''){
 			this.setState({
 				loading: true
@@ -86,9 +89,13 @@ class ReporterDashboard extends Component {
 	}
 	
 	handleAnonymousToggle = () => {
-		this.setState({
-			anonymous: !this.state.anonymous
-		})
+		localStorage.setItem('anonymous', !this.state.anonymous);
+		let anonymous = JSON.parse(localStorage.getItem('anonymous'));
+		setTimeout(() => {
+			this.setState({
+				anonymous: anonymous
+			})
+		}, 1000)
 	}
 	
 	handleShowReportForm = () => {

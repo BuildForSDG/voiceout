@@ -99,9 +99,6 @@ class Home extends Component {
 			sector_id: e.target.value
 		});
 	}
-	compareSortByVote = (a, b) => {
-		return a.upvoted.length - b.upvoted.length
-	}
 	compareSort = (a, b) => {
 		const A = new Date(a.created_at).getTime();
 		const B = new Date(b.created_at).getTime();
@@ -249,8 +246,7 @@ class Home extends Component {
 							<span className="required">*</span>
 						</label>
 						<select required name="state" value={this.state.state} onChange={this.handleChange}>
-							<option value='' >Select a State</option>
-							<option value=''> All </option>
+							<option value=''> All States</option>
 							
 							{
 								nigerianStates.map((data, i) => {
