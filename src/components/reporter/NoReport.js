@@ -8,15 +8,13 @@ const NoReport = (props) => {
       <br />
       <br />
       <p
+        id='noReport'
         className={
           props.anonymous?
           'yellow text-center':
           'text-center reportHeader'
         }
-        style={{
-          fontSize: '50px',
-          paddingBottom: '100px'
-        }}> You Do not have any report yet !!!</p>
+      > You Do not have any report yet !!!</p>
     </div>
   );
 }

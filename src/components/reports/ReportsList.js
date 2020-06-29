@@ -20,6 +20,7 @@ class ReportsList extends Component {
 		this.setState({
 			reports: this.props.reports
 		})
+		console.log(this.props.reports);
 	}
 	handleUserNotLoggedIn = () => {
 		localStorage.setItem('notLoggedInMessage', 'Not Logged In');
@@ -73,9 +74,21 @@ class ReportsList extends Component {
 		const storageData = JSON.parse(localStorage.getItem('response'));
 		return (
 			<div>
-				<div >
-					<Button onClick={this.sortByDate} style={{margin: '10px'}}>Sort By Date</Button>
-					<Button onClick={this.sortByVotes} style={{margin: '10px'}}>Sort By Upvotes</Button>
+				<div className=' btn-group-small' >
+					<Button
+						className='btn-sm'
+						onClick={this.sortByDate} 
+						style={{margin: '10px'}}
+					>
+						Sort By Date
+					</Button>
+					<Button
+						className='btn-sm'
+						onClick={this.sortByVotes} 
+						style={{margin: '10px'}}
+					>
+						Sort By Upvotes
+					</Button>
 				</div>
 
 				{/*mapping reports from props*/}

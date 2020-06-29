@@ -166,6 +166,10 @@ div.returned-comments{
 #video1{
 	max-width: 100%;
 }
+#noReport{
+	font-size: 50px;
+  padding-bottom: 100px
+}
 
 @media only screen and (max-width: 765px) {
   .singleReport{
@@ -201,5 +205,9 @@ div.returned-comments{
 	.report-summary{
 		font-size: .8rem;
 		width: 100%;
+	}
+	#noReport{
+		font-size: 20px;
+		padding-bottom: 100px
 	}
 }
