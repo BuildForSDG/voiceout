@@ -11,7 +11,7 @@ We believe this app will serve as an efficient tool to report cases and also pro
 This application aim to solve the United Nations Sustainable Development Goal 16 which is aimed at providing access to justice for all and building effective, accountable and inclusive institutions at all levels.<br/>
 
 ## Usage
-<br/>
+<https://voiceout.netlify.app>
 
 ## Setup
 <br/>
