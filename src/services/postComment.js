@@ -32,7 +32,7 @@ export const PostComment = async (id, comment) => {
     
     return json; 
   } catch (error) {
-    return error
+    return error;
   }
 }
 

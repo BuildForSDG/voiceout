@@ -31,10 +31,6 @@ class Login extends Component {
 				isLoading: false
 			});
 		}
-		
-		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
-		if(getLocalStorage && !getLocalStorage.hasOwnProperty('user')){
-		}
 	}
 	componentDidUpdate(){
 		if(this.props.response.message && this.state.reupdate){

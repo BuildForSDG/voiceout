@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../../style/Form.css';
 import { signUp } from '../../store/actions/authAction';
 import FormErrors from '../reporter/FormError';
+import BackgroundVideo from '../../images/BriberyVideo.mp4';
+import BackgroundImage from '../../images/bribery-act-1.jpg';
 import {Redirect, Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Loading from '../home/Loading';
@@ -136,10 +138,16 @@ class SignUp extends Component {
 		const { response } = this.props;
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') !== undefined;
-			if (localStorageNotUndefined) return <Redirect to='/reporter' />
+			if (localStorageNotUndefined) {return <Redirect to='/reporter' />}
 		}
 		return (
 			<div>
+				<video 
+          id='bgvideo' autoPlay loop muted 
+          poster={BackgroundImage} 
+          class="fullscreen-bg__video">
+          <source src={BackgroundVideo} type="video/mp4" />
+        </video>
 				{(this.state.isLoading) 
 					? <Loading />: ''
 				}

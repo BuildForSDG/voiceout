@@ -10,6 +10,7 @@ import SearchedReports from './components/home/SearchedReports';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import AllReports from './components/home/AllReports';
+import Voices from './components/home/Voices';
 
 class App extends Component{
   constructor(props){
@@ -106,6 +107,12 @@ class App extends Component{
               component={ () => 
                 <SearchedReports handleLoginDisplay={this.handleLoginDisplay} />
               } 
+            />
+            <Route
+              path='/voices'
+              component={() => 
+                <Voices/>
+              }
             />
             <Route 
               path="/all_reports" 

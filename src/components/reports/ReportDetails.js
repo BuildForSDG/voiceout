@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { asyncLocalStorage } from '../../services/asyncData';
 import { singleReport } from '../../store/actions/userReportAction';
 import { getSingleReport } from '../../services/getReports'
 import Loading from '../home/Loading';
-import Image from 'react-bootstrap/Image'
+import Image from 'react-bootstrap/Image';
 import { dateFromData } from '../../services/dateFromData';
 import {PostComment, GetComments} from '../../services/postComment';
 import { upvote, downvote } from '../../services/votes';

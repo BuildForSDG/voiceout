@@ -79,6 +79,12 @@ span.psw {
   border: 2px solid #888;
   width: 500px; 
 }
+.modal-content-voices{
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; 
+  border: 2px solid #888;
+  width: 1000px; 
+}
 .modal-content-signup {
   margin: 0 auto 15% auto !important;
 }

@@ -23,6 +23,9 @@ export default class ReporterSignedInLinks extends Component {
 		return (
 			<Nav className="ml-auto">
 				<Nav.Link href="">
+					<Link className="links" to='/voices'>Voices</Link>
+				</Nav.Link>
+				<Nav.Link href="">
 					<Link className="links" to='/all_reports'>All Reports</Link>
 				</Nav.Link>
 				<Nav.Link href="">
