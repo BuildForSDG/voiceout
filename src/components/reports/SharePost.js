@@ -18,7 +18,7 @@ export default class SharePost extends Component {
 		let voiceValid = this.state.voiceValid;
 		voiceValid = voice_id.length > 0;
 		this.setState({
-			voiceValid: voiceValid
+			voiceValid
 		}) 
 	}
 
@@ -35,7 +35,7 @@ export default class SharePost extends Component {
       voice_id.splice(index, 1);
 		}
 		this.setState({
-			voice_id: voice_id
+			voice_id
 		}, () => {
 			this.validateCheckbox(voice_id);
 		});

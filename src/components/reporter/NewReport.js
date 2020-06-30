@@ -80,8 +80,8 @@ class NewReport extends Component {
 		sectorValid = sector_id.length > 0;
 		reportFormError.sector_id = sectorValid ? '': 'You must check a sector';
 		this.setState({
-			sectorValid: sectorValid,
-			reportFormError: reportFormError
+			sectorValid,
+			reportFormError
 		}, this.validatePost) 
 	}
 

@@ -136,7 +136,7 @@ class SignUp extends Component {
 		const { response } = this.props;
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') !== undefined;
-			if (localStorageNotUndefined) return <Redirect to='/reporter' />
+			if (localStorageNotUndefined) {return <Redirect to='/reporter' />}
 		}
 		return (
 			<div>
