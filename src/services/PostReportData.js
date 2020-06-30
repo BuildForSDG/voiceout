@@ -18,7 +18,6 @@ const PostReportData = (type, userData, tok) => {
 			anonymous
 		 } = userData;
 		 let anonym = (anonymous) ? 1 : 0;
-		 console.log(anonym);
 		 
 		 const fd = new FormData();
 		 fd.append('title', title);
@@ -39,7 +38,6 @@ const PostReportData = (type, userData, tok) => {
 			}
 		 })
 		.then((response) => response.data)
-		//.then((response) => response.data.json())
 		.then((response) => {
 			resolve(response);
 		})

@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
-import { useLocation } from 'react-router-dom'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/navbar/NavBar';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import Home from './components/home/Home';
-import Axios from "axios";
 import ReporterDashboard from './components/reporter/ReporterDashboard';
-import VoiceDashboard from './components/voice/VoiceDashboard';
-import InstitutionDashboard from './components/institution/InstitutionDashboard';
 import ReportDetails from './components/reports/ReportDetails';
 import SearchedReports from './components/home/SearchedReports';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
+import AllReports from './components/home/AllReports';
 
 class App extends Component{
   constructor(props){
@@ -103,29 +100,17 @@ class App extends Component{
                   />
               }
             />
-            <Route
-              path='/voice'
-              component={() => 
-                //when the when loginDisplay is set to true, it remains true even when you logout
-                /* passing this props will ensure the loginDisplay returns false a s a the reporter
-                dashbord loads*/
-                <VoiceDashboard loginDisappear={this.loginDisappear}/>
-              }
-            />
-            <Route
-              path='/institution'
-              component={() => 
-                //when the when loginDisplay is set to true, it remains true even when you logout
-                /* passing this props will ensure the loginDisplay returns false a s a the reporter
-                dashbord loads*/
-                <InstitutionDashboard loginDisappear={this.loginDisappear}/>
-              }
-            />
             <Route path="/report/:id" component={ReportDetails} />
             <Route 
               path="/all_searched_reports" 
               component={ () => 
                 <SearchedReports handleLoginDisplay={this.handleLoginDisplay} />
+              } 
+            />
+            <Route 
+              path="/all_reports" 
+              component={ () => 
+                <AllReports />
               } 
             />
           </Switch>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import '../../style/Form.css';
-import { login, signUp } from '../../store/actions/authAction';
+import { signUp } from '../../store/actions/authAction';
 import FormErrors from '../reporter/FormError';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Loading from '../home/Loading';
+import { Button } from 'react-bootstrap';
 
 class SignUp extends Component {
 	constructor(props){
@@ -131,13 +132,10 @@ class SignUp extends Component {
 	}
 
 	render() {
-		//console.log(this.state.isLoading)
 		if(this.state.cancel){ return <Redirect to='/' /> }
 		const { response } = this.props;
-		console.log(response);
-		//if(response !== '') {this.props.notLoading()};
 		if(response.user && this.state.validLogin){
-			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
+			const localStorageNotUndefined = localStorage.getItem('response') !== undefined;
 			if (localStorageNotUndefined) return <Redirect to='/reporter' />
 		}
 		return (
@@ -147,7 +145,6 @@ class SignUp extends Component {
 				}
 				<div id="id01" className="modal">
 					<form onSubmit={this.handleSubmit} className="modal-content-signup animate">
-		{/*<input type="hidden" name="_token" value={token} />*/}
 						<div class="contain">
 							<span onClick={this.toHome} className="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
@@ -208,11 +205,15 @@ class SignUp extends Component {
 						</div>
 				
 						<div class="contain cancel-div">
-							<button type="button"
+							<button
+								onClick={this.toHome}
+								type="button"
 								class="cancelbtn">
 								Cancel
 							</button>
-							<span class="psw">Forgot <a href="#">password?</a></span>
+							<span class="psw">Already Registered?
+								<Button className='btn-light'><Link to="/login">Login</Link></Button>
+							</span>
 						</div>
 					</form>
 				</div>
@@ -230,7 +231,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return{
 			response: state.auth.response
 	}

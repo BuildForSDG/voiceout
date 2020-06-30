@@ -43,7 +43,6 @@ export default class SharePost extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
     if(!this.state.voiceValid){
       this.setState({
         formErrorMessage: 'You need to check at least one box'
@@ -56,7 +55,6 @@ export default class SharePost extends Component {
           'message': response.message,
           'showMessage': true
         })
-        console.log(response);
       })
     }
 
@@ -66,7 +64,6 @@ export default class SharePost extends Component {
       <div>
         <div id="id01" className="modal">
           <form onSubmit={this.handleSubmit} className="modal-content animate">
-    {/*<input type="hidden" name="_token" value={token} />*/}
             <div class="contain">
               <span onClick={this.props.handleShowSharePage} className="close" title="Close Modal">&times;</span>
               <div className='error-text'>

@@ -137,7 +137,9 @@ span.psw {
   .cancelbtn {
     width: 100%;
   }
-  .modal-content, .modal-content-newReport{
-      width: 80%
+  .modal-content, 
+  .modal-content-newReport,
+  .modal-content-signup{
+      width: 90%
   }
 }

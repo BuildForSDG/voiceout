@@ -24,7 +24,6 @@ class ReporterDashboard extends Component {
 			loading: false,
 			reports: '',
 			anonymous: false
-			//localStorageData: ''
 		}
 
 	}
@@ -61,7 +60,6 @@ class ReporterDashboard extends Component {
 		if(localStorage.getItem('response')){
 			getSectors()
 			.then(data => {
-				console.log(data);
 				this.setState({
 					sectorFromBackEnd: data,
 					loading: false
@@ -105,12 +103,9 @@ class ReporterDashboard extends Component {
 	}
 
 	render() {
-		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
-		console.log(getLocalStorage);
 		if(localStorage.getItem('response') == undefined) {return <Redirect to='/' />}
 		const { userReports } = this.props;    
-		if(localStorage.getItem('response') != undefined){
-			//console.log(JSON.parse(localStorage.getItem('response')));
+		if(localStorage.getItem('response') !== undefined){
 			const storage = JSON.parse(localStorage.getItem('response'));
 			return (
 				<div className={
@@ -181,10 +176,7 @@ class ReporterDashboard extends Component {
 					}
 				</div>
 			)
-		}
-		//console.log(this.state.localStorageData);
-		//console.log(this.props.handleDisplayState.loginDisplay)
-		
+		}		
 	}
 }
 
@@ -197,7 +189,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state)
 	return{
 			response: state.auth.response,
 			reportPost: state.reportPost.response,

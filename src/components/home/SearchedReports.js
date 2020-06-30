@@ -15,7 +15,6 @@ class SearchedReports extends Component {
   }
   render() {
     const {userReportsState} = this.props;
-    console.log(userReportsState);
     if(userReportsState.userReports){
       return (
         <div>
@@ -28,10 +27,7 @@ class SearchedReports extends Component {
               }
             </h1>
             <div >
-              <ReportsList
-                sortByDate={this.sortByDate}
-                sortByUpvotes={this.sortByVotes}
-              />
+              <ReportsList/>
               <h3>
                 {
                   (userReportsState.userReports.data.length === 0) ? 
@@ -63,7 +59,6 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return{
     userReportsState: state.userReports,
 	}

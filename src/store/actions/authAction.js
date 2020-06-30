@@ -2,16 +2,12 @@ import PostData from '../../services/PostData';
 import {asyncLocalStorage} from '../../services/asyncData'
 
 export const login = (data) => {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		dispatch({type: 'USER_LOADING'});
 
 		return PostData('login', data)
 		.then((response) => {
-			console.log(response);
 			asyncLocalStorage.setItem('response', response);
-			//localStorage.setItem('response', JSON.stringify(response));
-			//let x = JSON.parse(localStorage.getItem('response'));
-			//console.log(x);
 		})
 		.then(() => {
 			return asyncLocalStorage.getItem('response');
@@ -44,9 +40,6 @@ export const signUp = (data) => {
 		})
 		.then((response) => {
 			asyncLocalStorage.setItem('response', response);
-			//localStorage.setItem('response', JSON.stringify(response));
-			//let x = JSON.parse(localStorage.getItem('response'));
-			//console.log(x);
 		})
 		.then(() => {
 			return asyncLocalStorage.getItem('response');

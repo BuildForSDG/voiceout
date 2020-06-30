@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../../style/Form.css';
 import { login } from '../../store/actions/authAction';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import BackgroundVideo from '../../images/BriberyVideo.mp4';
 import BackgroundImage from '../../images/bribery-act-1.jpg';
 import { connect } from 'react-redux';
 import Loading from '../home/Loading';
+import { Button } from 'react-bootstrap';
 
 class Login extends Component {
 	constructor(props){
@@ -25,7 +26,6 @@ class Login extends Component {
 
 	componentDidMount(){
 		const {response} = this.props;
-		let invalidResponse = response.message;
 		if(response !== ''){
 			this.setState({
 				isLoading: false
@@ -34,7 +34,6 @@ class Login extends Component {
 		
 		const getLocalStorage = JSON.parse(localStorage.getItem('response'));
 		if(getLocalStorage && !getLocalStorage.hasOwnProperty('user')){
-			//localStorage.clear();
 		}
 	}
 	componentDidUpdate(){
@@ -55,7 +54,6 @@ class Login extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.login(this.state);
-		//this.props.loadingClick();
 		this.setState({
 			isLoading: true
 		})
@@ -69,7 +67,6 @@ class Login extends Component {
 	render() {
 		const { response } = this.props;
 		if(this.state.cancel){ return <Redirect to='/' /> }
-		//if(response !== '') {this.props.notLoading()};
 		if(response.user && this.state.validLogin){
 			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
 			if (localStorageNotUndefined){ return <Redirect to='/reporter' />}
@@ -87,7 +84,6 @@ class Login extends Component {
 				}
 				<div id="id01" className="modal">
 					<form onSubmit={this.handleSubmit} className="modal-content animate">
-		{/*<input type="hidden" name="_token" value={token} />*/}
 						<div class="contain">
 							<span onClick={this.toHome} className="close" title="Close Modal">&times;</span>
 							<div className='error-text'>
@@ -117,11 +113,15 @@ class Login extends Component {
 						</div>
 				
 						<div class="contain cancel-div">
-							<button type="button"
+							<button
+								onClick={this.toHome}
+								type="button"
 								class="cancelbtn">
 								Cancel
 							</button>
-							<span class="psw">Forgot <a href="#">password?</a></span>
+							<span class="psw">Not Registered?
+								<Button className='btn-light'><Link to="/sign-up">Sign Up</Link></Button>
+							</span>
 						</div>
 					</form>
 				</div>
@@ -139,7 +139,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-	//console.log(state);
 	return{
 			response: state.auth.response
 	}
