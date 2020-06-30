@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 
 export default class ReporterSignedInLinks extends Component {
 	constructor(props){
@@ -22,6 +22,9 @@ export default class ReporterSignedInLinks extends Component {
 		if(this.state.toHome) { return <Redirect to='/' />}
 		return (
 			<Nav className="ml-auto">
+				<Nav.Link href="">
+					<Link className="links" to='/all_reports'>All Reports</Link>
+				</Nav.Link>
 				<Nav.Link href="">
 					<Link className="links" to='/reporter'>My Reports</Link>
 				</Nav.Link>

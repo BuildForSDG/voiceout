@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import ReportsSummary from './ReportsSummary';
 import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-//import { asyncLocalStorage } from '../../services/asyncData';
 
 
 class ReportsList extends Component {
@@ -20,14 +19,12 @@ class ReportsList extends Component {
 		this.setState({
 			reports: this.props.reports
 		})
-		console.log(this.props.reports);
 	}
 	handleUserNotLoggedIn = () => {
 		localStorage.setItem('notLoggedInMessage', 'Not Logged In');
 		this.setState({
 			canRedirect: true,
 		});
-		console.log("object")
 	}
 	compareSort = (a, b) => {
 		const A = new Date(a.created_at).getTime();
@@ -59,19 +56,15 @@ class ReportsList extends Component {
 		//Just imagine sort was able to modify userReports even when i didnt 
 		//call the fuction on it.
 		let returnedReports = userReports;
-		console.log(userReports);
 		if(this.state.sortByVotes){
 			returnedReports && returnedReports.data.sort((a, b) => {
 				return (b.upvoted.length - a.upvoted.length)
 			})
-			console.log(returnedReports);
-			console.log(userReports)
 		}
+
 		if(this.state.sortByDate){
 			returnedReports && returnedReports.data.sort(this.compareSort)
-			console.log(userReports)
 		}
-		const storageData = JSON.parse(localStorage.getItem('response'));
 		return (
 			<div>
 				<div className=' btn-group-small' >
@@ -95,13 +88,8 @@ class ReportsList extends Component {
 				{	
 					returnedReports && returnedReports.data.map((data, i) => {
 						return (
-							storageData && storageData.user  ? 
 							<Link key={i} className="links" to={'/report/' + data.id}>
 								<ReportsSummary anonymous={this.props.anonymous} data={data}/>	
-							</Link>
-							:
-							<Link key={i} onClick={this.handleUserNotLoggedIn}>
-								<ReportsSummary data={data}/>	
 							</Link>
 						)
 					})
@@ -112,7 +100,6 @@ class ReportsList extends Component {
 }
 
 const mapStateToProps = (state) => {
-	//console.log(state.userReports.userReports.data);
 	return{
 			userReports: state.userReports,
 	}

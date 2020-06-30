@@ -2,7 +2,7 @@
 import {asyncLocalStorage} from '../../services/asyncData'
 
 export const dispatchUserReports = () => {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 
 		asyncLocalStorage.getItem('userReports')
 		.then((response) => {
@@ -19,7 +19,7 @@ export const dispatchUserReports = () => {
 
 
 export const dispatchAllUsersReports = () => {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 
 		asyncLocalStorage.getItem('allUsersReports')
 		.then((response) => {
@@ -35,7 +35,7 @@ export const dispatchAllUsersReports = () => {
 }
 
 export const singleReport = () => {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 
 		asyncLocalStorage.getItem('singleData')
 		.then((response) => {

@@ -200,7 +200,6 @@ class NewReport extends Component {
 			setTimeout(() => {
 				window.location.reload(true);
 			}, 3000)
-			console.log(this.state);
 			this.props.postReport(this.state);
 		}
 	}
@@ -321,7 +320,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return{
 		reportPost: state.reportPost.response
 	}

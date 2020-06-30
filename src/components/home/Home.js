@@ -3,8 +3,7 @@ import {Redirect} from 'react-router-dom';
 import BackgroundVideo from '../../images/BriberyVideo.mp4';
 import BackgroundImage from '../../images/bribery-act-1.jpg';
 import '../../style/Home.css';
-import { Button, Navbar, Nav, Container } from 'react-bootstrap';
-import NewReport from '../reporter/NewReport';
+import { Button } from 'react-bootstrap';
 import { getSectors } from '../../services/getSector';
 import { getReports } from '../../services/getReports';
 import { nigerianStates } from '../reporter/nigerianStates';
@@ -12,7 +11,6 @@ import Loading from './Loading';
 import {asyncLocalStorage} from '../../services/asyncData';
 import {connect} from 'react-redux';
 import { dispatchAllUsersReports } from '../../store/actions/userReportAction';
-//import { firstRow, secondRow, thirdRow } from '../reporter/selectSectorData';
 
 
 class Home extends Component {
@@ -21,7 +19,6 @@ class Home extends Component {
 
 		this.state = {
 			canRedirect: false,
-			showAnonymousReportForm: false,
 			loading: false,
 			sectorFromBackEnd: '',
 			sector_id: '',
@@ -86,15 +83,6 @@ class Home extends Component {
 	}
 
 	handleCheckbox = (e) => {
-		/*let sector_id = this.state.sector_id;
-		let index;
-		if(e.target.checked){
-			sector_id.push(e.target.value);
-		}
-		else{
-			index = sector_id.indexOf(e.target.value);
-      sector_id.splice(index, 1);
-		}*/
 		this.setState({
 			sector_id: e.target.value
 		});
@@ -117,7 +105,6 @@ class Home extends Component {
 		this.setState({
 			loading: true
 		});
-		console.log(this.state);
 		return getReports(this.state)
 		.then(data => {
 			const res = {
@@ -139,13 +126,6 @@ class Home extends Component {
 
 	render() {
 		if (this.state.canRedirect) {return <Redirect to='/all_searched_reports' />}
-		const { response } = this.props;
-		const data = JSON.parse(localStorage.getItem('response'));
-		if(response.user){
-			//const localResponse = JSON.parse(localStorage.getItem('response'));
-			const reporter = response.user.role == 'user';
-			const localStorageNotUndefined = localStorage.getItem('response') != undefined;
-		}
 		return (
 			<div className='homeContainer container'>
 				<video 
@@ -173,33 +153,14 @@ class Home extends Component {
 						that by the good people.” 
 					</h2>
 					<h3>Dr Martin Luther King Jr</h3>
-					{/*
-						<Button onClick={this.handleShowReportForm}>Make a Report</Button>*/
-					}
 					<div id='aboutList'>
 						<p>Are you being <b>Oppressed</b> in one way or the other?</p>
 						<p>Do you have any picture or video evidence?</p>
 						<p>Login to make a <b>Report today</b></p>
 					</div>
 				</header>
-				{/*(this.props.handleDisplayState.loginDisplay) 
-					? <Login 
-						notLoading={this.notLoading}
-						loadingClick={this.loading}
-						handleLoginDisplay={this.props.handleLoginDisplay}
-						loginDisappear={this.props.loginDisappear} />: ''
-				}
-				{(this.props.handleDisplayState.signUpDisplay) 
-					? <SignUp
-						notLoading={this.notLoading}
-						loadingClick={this.loading}
-						handleSignUpDisplay={this.props.handleSignUpDisplay} />: ''*/
-				}
 				{(this.state.loading) 
 					? <Loading />: ''
-				}
-				{(this.state.showAnonymousReportForm)
-					? <NewReport handleShowReportForm={this.handleShowReportForm} />: ''
 				}
 				<div id='search' className="checkbox">
 					<form onSubmit={this.handleSubmit} className="home_checkbox">
@@ -276,7 +237,6 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return{
 			response: state.auth.response
 	}

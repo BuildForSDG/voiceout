@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import { Redirect } from 'react-router-dom'
 import { asyncLocalStorage } from '../../services/asyncData';
 import { singleReport } from '../../store/actions/userReportAction';
 import { getSingleReport } from '../../services/getReports'
@@ -11,7 +10,6 @@ import {PostComment, GetComments} from '../../services/postComment';
 import { upvote, downvote } from '../../services/votes';
 import { getVotes } from '../../services/getVotes';
 import SharePost from './SharePost';
-import { Button } from 'react-bootstrap';
 import { getVoices } from '../../services/getVoices';
 import Votes from './Votes';
 import Comments from './Comments';
@@ -70,7 +68,6 @@ class ReportDetails extends Component {
 			image.setAttribute("property", "og:image");
 			image.setAttribute("content", data.media_url.images[0]);
 			document.head.appendChild(image);
-			console.log(data);
 			this.setState({
 				getSingleReport: data
 			})
@@ -79,9 +76,9 @@ class ReportDetails extends Component {
 
 		const {userReports} = this.props;
 		const data = JSON.parse(localStorage.getItem('response'));
-		if( data && data.user != undefined && userReports){
+		if( data && data.user !== undefined && userReports){
 			const singleData = userReports.filter(data => {
-				return data.id == params.id
+				return data.id === params.id
 			})
 			asyncLocalStorage.setItem('singleData', singleData[0]);
 		}
@@ -125,11 +122,9 @@ class ReportDetails extends Component {
 		this.setState({
 				comment: ''
 		})
-		console.log(this.state);
 		const id = this.props.match.params.id;
 		PostComment(id, this.state.comment)
 		.then((res) => {
-			console.log(res);
 			this.setState({
 				returnedComments: res
 			})
@@ -266,7 +261,9 @@ class ReportDetails extends Component {
 									comments={this.state.comments}
 								/>
 							</div> : 
-							''
+							<div style={{color: '#f46'}}>
+								<p>You can Upvote, Downvote and Comment on this Post when you Login</p>
+							</div>
 						}
 					</div>
 				</div>
@@ -289,7 +286,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return{
 		response: state.auth.response,
 		oneReport: state.singleReport.singleReport,

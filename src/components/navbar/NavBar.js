@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap'
+import { Navbar, Container } from 'react-bootstrap'
 import SignedOutLinks from './SignedOutLinks'
 import ReporterSignedInLinks from './ReporterSignedInLinks';
 
@@ -9,7 +9,6 @@ class NavBar extends Component {
 	constructor(props){
 		super(props);
 	}
-	
 		
 	render() {
 		let link = '';

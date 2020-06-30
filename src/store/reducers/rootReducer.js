@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-import {postReportReducer, 
+import {
+    postReportReducer, 
     userReportsReducer, 
     singleReportReducer
 } from './postReportReducer';

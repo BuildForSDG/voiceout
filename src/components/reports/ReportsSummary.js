@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReportDetails from './ReportDetails'
 import Image from 'react-bootstrap/Image'
 import '../../style/Home.css';
 import { dateFromData } from '../../services/dateFromData';

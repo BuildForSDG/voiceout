@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { asyncLocalStorage } from '../../services/asyncData';
+import { Nav } from 'react-bootstrap';
 
 export default class SignedOutLinks extends Component {
-	constructor(props){
-		super(props);
-	}
 	render() {
 		return (
 			<Nav className="ml-auto">
 				<Nav.Link href="#home">
-					<Link onClick={this.props.handleSignUpDisplay} to='sign-up' className="links">Sign Up</Link>
+					<Link onClick={this.props.handleSignUpDisplay} to='/sign-up' className="links">Sign Up</Link>
 				</Nav.Link>
 				<Nav.Link href="#link">
 					<Link onClick={this.props.handleLoginDisplay} to="/login" className="links">Login</Link>
