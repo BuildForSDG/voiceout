@@ -3,6 +3,7 @@ VoiceOut
 ## About
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1f261aba655a4b42b4fa83c0029f39ec)](https://app.codacy.com/gh/BuildForSDG/voiceout?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/voiceout&utm_campaign=Badge_Grade_Settings)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1f261aba655a4b42b4fa83c0029f39ec)](https://app.codacy.com/gh/BuildForSDG/voiceout?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/voiceout&utm_campaign=Badge_Grade_Settings)
 
 Nigeria is a very big country that needs the VoiceOut app in our battle against Corruption. VoiceOut is an App that exposes Irregularities, Corruption and Bribery in Nigerian Institutions. 
  
