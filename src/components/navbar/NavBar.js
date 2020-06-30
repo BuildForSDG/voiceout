@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Container } from 'react-bootstrap'
+import { Navbar, Container, Nav } from 'react-bootstrap'
 import SignedOutLinks from './SignedOutLinks'
 import ReporterSignedInLinks from './ReporterSignedInLinks';
 

@@ -6,6 +6,9 @@ export default class SignedOutLinks extends Component {
 	render() {
 		return (
 			<Nav className="ml-auto">
+				<Nav.Link href="">
+					<Link className="links" to='/voices'>Voices</Link>
+				</Nav.Link>
 				<Nav.Link href="#home">
 					<Link onClick={this.props.handleSignUpDisplay} to='/sign-up' className="links">Sign Up</Link>
 				</Nav.Link>
