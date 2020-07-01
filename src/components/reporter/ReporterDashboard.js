@@ -103,7 +103,7 @@ class ReporterDashboard extends Component {
 	}
 
 	render() {
-		if(localStorage.getItem('response') === undefined) {return <Redirect to='/' />}
+		if(localStorage.getItem('response') == undefined) {return <Redirect to='/' />}
 		const { userReports } = this.props;    
 		if(localStorage.getItem('response') !== undefined){
 			const storage = JSON.parse(localStorage.getItem('response'));
@@ -117,8 +117,8 @@ class ReporterDashboard extends Component {
 						<Button 
 							className={
 								this.state.anonymous?
-								'anonymous-yellow':
-								''
+								'anonymous-yellow btn-light':
+								'btn-light'
 							} 
 							onClick={this.handleAnonymousToggle}>
 							{
@@ -128,7 +128,7 @@ class ReporterDashboard extends Component {
 							}
 						</Button>
 						<h1>Welcome 
-							<span 
+							<span
 								className={
 									this.state.anonymous?
 									'anonymous-yellow name':
