@@ -78,7 +78,7 @@ class NewReport extends Component {
 		let sectorValid = this.state.sectorValid;
 		let reportFormError = this.state.reportFormError;
 		sectorValid = sector_id.length > 0;
-		reportFormError.sector_id = sectorValid ? '': 'You must check a sector';
+		reportFormError.sector_id = sectorValid ? '': 'You must check a category';
 		this.setState({
 			sectorValid,
 			reportFormError
@@ -246,7 +246,7 @@ class NewReport extends Component {
 							</label>
 							<input
 								type="text"
-								placeholder="Enter Address of Institution you want to report"
+								placeholder="Enter Location of Institution or Individual you want to report"
 								name="address"
 								onChange={this.handleChange}
 								required
