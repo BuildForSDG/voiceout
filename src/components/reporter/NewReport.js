@@ -198,8 +198,8 @@ class NewReport extends Component {
 				submitError: ''
 			})
 			setTimeout(() => {
-				window.location.reload(true);
-			}, 3000)
+				//window.location.reload(true);
+			}, 10000)
 			this.props.postReport(this.state);
 		}
 	}

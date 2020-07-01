@@ -238,11 +238,12 @@ class ReportDetails extends Component {
 							})
 						}</p>
 						<p className='small-letter'>Voices Shared with: {
+							oneReport  && oneReport.voices.length > 1 ?
 							oneReport.voices.map((data, i) => {
-								return (
+								return(
 									<span key={i}> {" " + data.name}, </span>
 								)
-							})
+							}): 'Report has not been Shared with any voice'
 						}</p>
 						<p className='small-letter'>Location: {oneReport.address}</p>
 						<p className='small-letter'>State: {oneReport.state}</p>
