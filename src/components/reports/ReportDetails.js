@@ -230,8 +230,15 @@ class ReportDetails extends Component {
 							}
 						</p>
 						<p>{oneReport.description}</p>
-						<p className='small-letter'>Sector: {
+						<p className='small-letter'>Category: {
 							oneReport.sector.map((data, i) => {
+								return (
+									<span key={i}> {" " + data.name}, </span>
+								)
+							})
+						}</p>
+						<p className='small-letter'>Voices Shared with: {
+							oneReport.voices.map((data, i) => {
 								return (
 									<span key={i}> {" " + data.name}, </span>
 								)
