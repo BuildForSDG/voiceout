@@ -58,27 +58,31 @@ class Voices extends Component {
                 <caption className='text-center'>
                   These are information of <b>Voices</b> you can post your <b>Report</b> to.
                 </caption>
-                <tr>
-                  <th>S/N</th>
-                  <th>Name</th>
-                  <th>Address</th>
-                  <th>Email</th>
-                  <th>About</th>
-                </tr>
-                {
-                  this.state.voices && 
-                  this.state.voices.map( (data, i) => {
-                    return (
-                      <tr key={i}>
-                        <td>{i + 1}</td>
-                        <td>{data.name}</td>
-                        <td>{data.address}</td>
-                        <td>{data.email}</td>
-                        <td>{data.description}</td>
-                      </tr>
-                    )
-                  })
-                }
+                <thead>
+                  <tr>
+                    <th>S/N</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>About</th>
+                  </tr>        
+                </thead>
+                <tbody>
+                  {
+                    this.state.voices && 
+                    this.state.voices.map( (data, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>{i + 1}</td>
+                          <td>{data.name}</td>
+                          <td>{data.address}</td>
+                          <td>{data.email}</td>
+                          <td>{data.description}</td>
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
               </table>
             </div>
           </div>
