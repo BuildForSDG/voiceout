@@ -164,12 +164,12 @@ class Home extends Component {
 				}
 				<div id='search' className="checkbox">
 					<form onSubmit={this.handleSubmit} className="home_checkbox">
-						<h4>Use the filter below to search for Reports by Sector and by State</h4>
+						<h4>Use the filter below to search for Reports by Category and by State</h4>
 						
 						<label 
 							style={{fontSize: '20px'}} 
 							className='labelHome' 
-							for="sector">Select a Sector
+							for="sector">Select a Category
 							<span className="required">*</span>
 						</label>
 						<div class='sector-flex-container'>
