@@ -39,6 +39,7 @@ const PostReportData = (type, userData, tok) => {
 		 })
 		.then((response) => response.data)
 		.then((response) => {
+			console.log(response);
 			resolve(response);
 		})
 		.catch((error) => {
