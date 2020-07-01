@@ -231,12 +231,12 @@ class NewReport extends Component {
 								required
 							/>
 				
-							<label for="institutionToReport">Institution
+							<label for="institutionToReport">Institution/Individual
 								<span className="required">*</span>
 							</label>
 							<input
 								type="text"
-								placeholder="Enter Name of Institution you want to report"
+								placeholder="Enter Name of Institution or Individual you want to report"
 								name="institution"
 								onChange={this.handleChange}
 								required
@@ -262,7 +262,7 @@ class NewReport extends Component {
 								name="report"
 								required
 							/>
-							<label for="sector">Select a Sector
+							<label for="sector">Select a Category
 								<span className="required">*</span>
 							</label>
 							<div class='sector-flex-container'>
