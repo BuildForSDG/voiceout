@@ -1,8 +1,8 @@
 # VoiceOut
 
-## About
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4aa27a34f790424ea6b234f4eb9ff647)](https://app.codacy.com/gh/BuildForSDG/voiceout-api?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/voiceout-api&utm_campaign=Badge_Grade_Dashboard)
+
+## About
 
 VoiceOut is an app that exposes Irregularities, Bribery, Corruption and Human rights violations in Nigeria and her Institutions. 
  
