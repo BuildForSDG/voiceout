@@ -1,6 +1,9 @@
 h2, h3 {
 	font-size: 1.5rem;
 }
+h1{
+	font-size: 2rem
+}
 h2{
 	font-weight: bold;
 }
@@ -150,17 +153,15 @@ div.returned-comments{
 	max-height: 100%;
 }
 .detail-flex{
-	padding: px;
 	width: 100%;
 	margin: auto;
 	border-radius: 10px;
 }
 .media{
 	width: 100%;
-	padding: 30px;
+	padding: 2px;
 }
 .media-parent{
-	border: 1px solid black;
 	width: 60%;
 }
 #video1{
@@ -183,7 +184,7 @@ div.returned-comments{
 		max-width: 100%;
 		font-size: 10px;
 	}
-	.media{
+	.media-parent{
 		width: 100%;
 	}
 	h1{

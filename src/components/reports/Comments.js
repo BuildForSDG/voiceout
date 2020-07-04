@@ -13,7 +13,7 @@ const Comments = (props) => {
               return (
                 <div key={i}>
                   <p className='comment-description'>{data.description}</p>
-                  <p className='comment-author'>Author - {data.user.first_name + ' ' + data.user.last_name}</p>
+                  <p className='comment-author'>{data.user.first_name + ' ' + data.user.last_name}</p>
                   <p className='time smaller-letter'>Commented on {date.days[date.day]}, 
                     {" " + date.date} - 
                     {date.months[date.month]} - 
