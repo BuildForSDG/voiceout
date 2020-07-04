@@ -1,6 +1,9 @@
 h2, h3 {
 	font-size: 1.5rem;
 }
+h1{
+	font-size: 2rem
+}
 h2{
 	font-weight: bold;
 }
@@ -62,6 +65,7 @@ button.sector_submit {
 
 .homeContainer{
 	padding-top: 50px;
+	padding-bottom: 30px;
 }
 #aboutList{
 	margin: auto;
@@ -77,15 +81,16 @@ button.sector_submit {
 	color: rgb(36, 65, 231)
 }
 .singleReport-body{
-	padding-top: 20px;
+	padding-top: 100px;
 }
 .singleReport{
 	line-height: 2rem;
 	width: 80%;
 	margin: auto;
-	padding-top: 60px;
+	padding: 10px;
 	font-size: larger;
 	border-radius: 5px;
+	background-color: rgb(247, 245, 245, 0.8);
 }
 i:hover{
 	cursor: pointer;
@@ -150,17 +155,15 @@ div.returned-comments{
 	max-height: 100%;
 }
 .detail-flex{
-	padding: px;
 	width: 100%;
 	margin: auto;
 	border-radius: 10px;
 }
 .media{
 	width: 100%;
-	padding: 30px;
+	padding: 2px;
 }
 .media-parent{
-	border: 1px solid black;
 	width: 60%;
 }
 #video1{
@@ -183,7 +186,7 @@ div.returned-comments{
 		max-width: 100%;
 		font-size: 10px;
 	}
-	.media{
+	.media-parent{
 		width: 100%;
 	}
 	h1{

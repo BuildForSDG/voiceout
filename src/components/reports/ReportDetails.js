@@ -6,6 +6,8 @@ import { getSingleReport } from '../../services/getReports'
 import Loading from '../home/Loading';
 import Image from 'react-bootstrap/Image';
 import { dateFromData } from '../../services/dateFromData';
+import BackgroundVideo from '../../images/BriberyVideo.mp4';
+import BackgroundImage from '../../images/bribery-act-1.jpg';
 import {PostComment, GetComments} from '../../services/postComment';
 import { upvote, downvote } from '../../services/votes';
 import { getVotes } from '../../services/getVotes';
@@ -169,16 +171,22 @@ class ReportDetails extends Component {
 		const data = JSON.parse(localStorage.getItem('response'));
 		const localStorageUser = data && data.user ? data.user : '';
 		if(data && !data.hasOwnProperty('user') ) {
-			oneReport = this.props.oneReport.id === this.props.match.params.id ? 
-									this.props.oneReport : 
+			oneReport = this.props.oneReport.id === this.props.match.params.id ?
+									this.props.oneReport :
 									this.state.getSingleReport
 		}
 		oneReport = this.state.getSingleReport;
-		//if(data == undefined){ return <Redirect to='/' />}
+		console.log(oneReport);
 		if(oneReport && oneReport.id == this.props.match.params.id){
 			const date = dateFromData(oneReport);
 			return (
 				<div className='container singleReport-body'>
+					<video 
+						id='bgvideo' autoPlay loop muted 
+						poster={BackgroundImage} 
+						class="fullscreen-bg__video">
+						<source src={BackgroundVideo} type="video/mp4" />
+					</video>
 					{
 						this.state.showSharePage ?
 						<SharePost
@@ -230,23 +238,23 @@ class ReportDetails extends Component {
 							}
 						</p>
 						<p>{oneReport.description}</p>
-						<p className='small-letter'>Category: {
+						<p className='small-letter'><b>Category:</b> {
 							oneReport.sector.map((data, i) => {
 								return (
 									<span key={i}> {" " + data.name}, </span>
 								)
 							})
 						}</p>
-						<p className='small-letter'>Voices Shared with: {
-							oneReport  && oneReport.voices.length > 1 ?
+						<p className='small-letter'><b>Voices Shared with:</b> {
+							oneReport  && oneReport.voices.length > 0 ?
 							oneReport.voices.map((data, i) => {
 								return(
 									<span key={i}> {" " + data.name}, </span>
 								)
 							}): 'Report has not been Shared with any voice'
 						}</p>
-						<p className='small-letter'>Location: {oneReport.address}</p>
-						<p className='small-letter'>State: {oneReport.state}</p>
+						<p className='small-letter'><b>Location:</b> {oneReport.address}</p>
+						<p className='small-letter'><b>State:</b> {oneReport.state}</p>
 						{
 							localStorageUser ?
 							<div>
@@ -266,7 +274,7 @@ class ReportDetails extends Component {
 									returnedComments={this.state.returnedComments}
 									handleSubmit={this.handleSubmit}
 									handleChange={this.handleChange}
-									comments={this.state.comments}
+									comment={this.state.comment}
 								/>
 							</div> : 
 							<div style={{color: '#f46'}}>
