@@ -80,15 +80,16 @@ button.sector_submit {
 	color: rgb(36, 65, 231)
 }
 .singleReport-body{
-	padding-top: 20px;
+	padding-top: 100px;
 }
 .singleReport{
 	line-height: 2rem;
 	width: 80%;
 	margin: auto;
-	padding-top: 60px;
+	padding: 10px;
 	font-size: larger;
 	border-radius: 5px;
+	background-color: rgb(247, 245, 245, 0.8);
 }
 i:hover{
 	cursor: pointer;
