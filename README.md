@@ -6,7 +6,7 @@
 
 VoiceOut is an app that exposes Irregularities, Bribery, Corruption and Human rights violations in Nigeria and her Institutions. 
  
-We believe this app will serve as an efficient tool to report cases and also serve as a platform to access firsthand information about numerous loopholes in our various institutions and unlawful acts in the country. Citizens are free to express their concerns and submit reports anonymously or acknowledgedly. Reports can also be shared with national and international bodies fighting for justice<br/>
+We believe this app will serve as an efficient tool to report cases and also serve as a platform to access firsthand information about numerous loopholes in our institutions and unlawful acts in the country. Citizens are free to express their concerns and submit reports anonymously or acknowledgedly. Reports can also be shared with national and international bodies fighting for justice<br/>
 
 ## Why
 
