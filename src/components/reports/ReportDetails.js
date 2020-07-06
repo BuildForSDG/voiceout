@@ -6,8 +6,6 @@ import { getSingleReport } from '../../services/getReports'
 import Loading from '../home/Loading';
 import Image from 'react-bootstrap/Image';
 import { dateFromData } from '../../services/dateFromData';
-import BackgroundVideo from '../../images/BriberyVideo.mp4';
-import BackgroundImage from '../../images/bribery-act-1.jpg';
 import {PostComment, GetComments} from '../../services/postComment';
 import { upvote, downvote } from '../../services/votes';
 import { getVotes } from '../../services/getVotes';
