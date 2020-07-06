@@ -181,12 +181,6 @@ class ReportDetails extends Component {
 			const date = dateFromData(oneReport);
 			return (
 				<div className='container singleReport-body'>
-					<video 
-						id='bgvideo' autoPlay loop muted 
-						poster={BackgroundImage} 
-						class="fullscreen-bg__video">
-						<source src={BackgroundVideo} type="video/mp4" />
-					</video>
 					{
 						this.state.showSharePage ?
 						<SharePost
