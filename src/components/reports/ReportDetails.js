@@ -6,8 +6,6 @@ import { getSingleReport } from '../../services/getReports'
 import Loading from '../home/Loading';
 import Image from 'react-bootstrap/Image';
 import { dateFromData } from '../../services/dateFromData';
-import BackgroundVideo from '../../images/BriberyVideo.mp4';
-import BackgroundImage from '../../images/bribery-act-1.jpg';
 import {PostComment, GetComments} from '../../services/postComment';
 import { upvote, downvote } from '../../services/votes';
 import { getVotes } from '../../services/getVotes';
@@ -181,12 +179,6 @@ class ReportDetails extends Component {
 			const date = dateFromData(oneReport);
 			return (
 				<div className='container singleReport-body'>
-					<video 
-						id='bgvideo' autoPlay loop muted 
-						poster={BackgroundImage} 
-						class="fullscreen-bg__video">
-						<source src={BackgroundVideo} type="video/mp4" />
-					</video>
 					{
 						this.state.showSharePage ?
 						<SharePost
