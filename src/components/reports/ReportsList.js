@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import ReportsSummary from './ReportsSummary';
 import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { asyncLocalStorage } from '../../services/asyncData';
 
 
 class ReportsList extends Component {
@@ -11,13 +12,16 @@ class ReportsList extends Component {
 		this.state = {
 			reports: '',
 			canRedirect: false,
-			sortByDate: true,
-      sortByVotes: false
+			sortByDate: false,
+			sortByVotes: false,
+			fromStorage: '',
+			userReports: ''
 		}
 	}
 	componentDidMount(){
 		this.setState({
-			reports: this.props.reports
+			fromStorage: JSON.parse(localStorage.getItem('sorts')),
+			reports: this.props.reports,
 		})
 	}
 	handleUserNotLoggedIn = () => {
@@ -39,31 +43,35 @@ class ReportsList extends Component {
 		return comparison;
 	}
 	sortByDate = () => {
-    this.setState({
-      sortByDate: true,
-      sortByVotes: false
-    })
+		this.setState({
+			sortByDate: true,
+			sortByVotes: false,
+		})
   }
   sortByVotes = () => {
-    this.setState({
-      sortByDate: false,
-      sortByVotes: true
-    })
+		this.setState({
+			sortByDate: false,
+			sortByVotes: true,
+		})
   }
 	render() {
 		if (this.state.canRedirect) {return <Redirect to='/' />}
-		const { userReports: {userReports} } = this.props;
 		//Just imagine sort was able to modify userReports even when i didnt 
 		//call the fuction on it.
+		const { userReports: {userReports} } = this.props;
 		let returnedReports = userReports;
+		let reports4rmLocal = localStorage.getItem('sorts') ?
+													JSON.parse(localStorage.getItem('sorts')) :
+													returnedReports;
+		if(this.state.sortByDate){
+			reports4rmLocal.data.sort(this.compareSort);
+			localStorage.setItem('sorts', JSON.stringify(reports4rmLocal))
+		}
 		if(this.state.sortByVotes){
-			returnedReports && returnedReports.data.sort((a, b) => {
+			reports4rmLocal.data.sort((a, b) => {
 				return (b.upvoted.length - a.upvoted.length)
 			})
-		}
-
-		if(this.state.sortByDate){
-			returnedReports && returnedReports.data.sort(this.compareSort)
+			localStorage.setItem('sorts', JSON.stringify(reports4rmLocal))
 		}
 		return (
 			<div>
@@ -86,7 +94,7 @@ class ReportsList extends Component {
 
 				{/*mapping reports from props*/}
 				{	
-					returnedReports && returnedReports.data.map((data, i) => {
+					reports4rmLocal && reports4rmLocal.data.map((data, i) => {
 						return (
 							<Link key={i} className="links" to={'/report/' + data.id}>
 								<ReportsSummary anonymous={this.props.anonymous} data={data}/>	

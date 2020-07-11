@@ -38,17 +38,16 @@ export const PostComment = async (id, comment) => {
 
 export const GetComments = (id) => {
   return new Promise((resolve, reject) => {
-    const getLocalStorage = JSON.parse(localStorage.getItem('response'));
-    const token = getLocalStorage ? getLocalStorage.token : ''
+    //const getLocalStorage = JSON.parse(localStorage.getItem('response'));
+    //const token = getLocalStorage ? getLocalStorage.token : '';
     let tok = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
     fetch('https://voiceout-api.herokuapp.com/api/reports/'+id+'/comments', {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json, text-plain, */*",
-        "X-Requested-With": "XMLHttpRequest",
         "X-CSRF-TOKEN": tok,
-        "Authorization" : `Bearer ${token}`
+        //"Authorization" : `Bearer ${token}`
       }
     })
     .then((response) => response.json())

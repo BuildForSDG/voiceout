@@ -85,19 +85,28 @@ class ReportDetails extends Component {
 		setTimeout(() => {
 			this.props.singleReport();
 		}, 1000);
-		if(data && data.user !== undefined){
-			const getLocalStorage = JSON.parse(localStorage.getItem('response'));
-			const user_id = getLocalStorage.user.id;
-			getVotes(params.id)
-			.then(res => {
+		
+		
+		getVotes(params.id)
+		.then(res => {
+			if(data && data.user !== undefined){
+				const user_id = data.user.id;
 				this.setState({
 					upvote: res.upvoted.includes(user_id),
 					downvote: res.downvoted.includes(user_id),
 					upvotes: res.upvoted.length,
 					downvotes: res.downvoted.length
 				})
-			});
-		}
+			}
+			else{
+				this.setState({
+					upvote: false,
+					downvote: false,
+					upvotes: res.upvoted.length,
+					downvotes: res.downvoted.length
+				})
+			}
+		});
 		
 	}
 
@@ -167,14 +176,12 @@ class ReportDetails extends Component {
 		//const oneReport = this.props.oneReport || this.state.getSingleReport;
 		let oneReport;
 		const data = JSON.parse(localStorage.getItem('response'));
-		const localStorageUser = data && data.user ? data.user : '';
 		if(data && !data.hasOwnProperty('user') ) {
 			oneReport = this.props.oneReport.id === this.props.match.params.id ?
 									this.props.oneReport :
 									this.state.getSingleReport
 		}
 		oneReport = this.state.getSingleReport;
-		console.log(oneReport);
 		if(oneReport && oneReport.id == this.props.match.params.id){
 			const date = dateFromData(oneReport);
 			return (
@@ -247,32 +254,26 @@ class ReportDetails extends Component {
 						}</p>
 						<p className='small-letter'><b>Location:</b> {oneReport.address}</p>
 						<p className='small-letter'><b>State:</b> {oneReport.state}</p>
-						{
-							localStorageUser ?
-							<div>
-								<Votes
-									id={this.props.match.params.id}
-									handleShowSharePage={this.handleShowSharePage}
-									oneReport={oneReport}
-									stateUpvote={this.state.upvote}
-									stateUpvotes={this.state.upvotes}
-									upvoteFunction={this.upvote}
-									stateDownvote={this.state.downvote}
-									stateDownvotes={this.state.downvotes}
-									downvoteFunction={this.downvote}
-									/>
-								<hr/>
-								<Comments 
-									returnedComments={this.state.returnedComments}
-									handleSubmit={this.handleSubmit}
-									handleChange={this.handleChange}
-									comment={this.state.comment}
+						<div>
+							<Votes
+								id={this.props.match.params.id}
+								handleShowSharePage={this.handleShowSharePage}
+								oneReport={oneReport}
+								stateUpvote={this.state.upvote}
+								stateUpvotes={this.state.upvotes}
+								upvoteFunction={this.upvote}
+								stateDownvote={this.state.downvote}
+								stateDownvotes={this.state.downvotes}
+								downvoteFunction={this.downvote}
 								/>
-							</div> : 
-							<div style={{color: '#f46'}}>
-								<p>You can Upvote, Downvote and Comment on this Post when you Login</p>
-							</div>
-						}
+							<hr/>
+							<Comments 
+								returnedComments={this.state.returnedComments}
+								handleSubmit={this.handleSubmit}
+								handleChange={this.handleChange}
+								comment={this.state.comment}
+							/>
+						</div>
 					</div>
 				</div>
 			)

@@ -1,14 +1,17 @@
-import React from 'react';
 import { dateFromData } from '../../services/dateFromData';
+import React, { Component } from 'react'
 
-const Comments = (props) => {
-  return (
-    <div className='commentReport'>
-      <label>Comments</label>
+class Comments extends Component {
+  render() {
+    const data = JSON.parse(localStorage.getItem('response'));
+    const localStorageUser = data && data.user ? data.user : '';
+    return (
+      <div className='commentReport'>
+        <label>Comments</label>
         <div className='returned-comments'>
           {
-            props.returnedComments &&
-            props.returnedComments.map((data, i) => {
+            this.props.returnedComments &&
+            this.props.returnedComments.map((data, i) => {
               const date = dateFromData(data);
               return (
                 <div key={i}>
@@ -28,20 +31,27 @@ const Comments = (props) => {
             })
           }
         </div>
-      <form onSubmit={props.handleSubmit}>
-        <textarea
-          placeholder='Add your comments here'
-          name='comment'
-          cols="30" 
-          rows="10" 
-          className="textarea" 
-          onChange={props.handleChange}
-          value={props.comment}>
-        </textarea>
-        <button type='submit' className="btn btn-primary">Add Comment</button>
-      </form>
-    </div>
-  );
+        {
+          localStorageUser ?
+            <form onSubmit={this.props.handleSubmit}>
+              <textarea
+                placeholder='Add your comments here'
+                name='comment'
+                cols="30" 
+                rows="10" 
+                className="textarea" 
+                onChange={this.props.handleChange}
+                value={this.props.comment}>
+              </textarea>
+              <button type='submit' className="btn btn-primary">Add Comment</button>
+            </form> : 
+            <div style={{color: '#f46'}}>
+              <p>You can Upvote, Downvote and Comment on this Post when you Login</p>
+            </div>
+        }
+      </div>
+    )
+  }
 }
 
 export default Comments;

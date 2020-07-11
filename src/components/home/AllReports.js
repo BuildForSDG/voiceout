@@ -38,7 +38,6 @@ class AllReports extends Component {
 			this.props.dispatchAllUsersReports()
 		})
 		.then(() => {
-      console.log(78)
 			this.setState({
 				loading: false,
 			})

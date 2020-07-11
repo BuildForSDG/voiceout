@@ -75,7 +75,8 @@ button.sector_submit {
 	font-size: 18px;
 }
 .time{
-	color: rgb(248, 85, 85)
+	color: rgb(248, 85, 85);
+	font-size: 15px;
 }
 .authorName{
 	color: rgb(36, 65, 231)
@@ -173,7 +174,9 @@ div.returned-comments{
 	font-size: 50px;
   padding-bottom: 100px
 }
-
+.image-caption{
+	font-size: 15px
+}
 @media only screen and (max-width: 765px) {
   .singleReport{
 		width: 100%;
