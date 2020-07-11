@@ -20,7 +20,7 @@ export default class ReportsSummary extends Component {
 						}
 						fluid
 					/>
-					<figcaption>{data.title}</figcaption>
+					<figcaption className='image-caption'>{data.title}</figcaption>
 				</figure>
 				<br />
 				<p className='time'>Reported on {date.days[date.day]}, 

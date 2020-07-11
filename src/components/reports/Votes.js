@@ -20,7 +20,11 @@ const Votes = (props) => {
             thumb_up
         </i> :
         <i
-          onClick={props.upvoteFunction}
+          onClick={
+            localStorageUser ?
+            props.upvoteFunction :
+            ''
+          }
           className='material-icons'>
             thumb_up
         </i>
@@ -35,7 +39,11 @@ const Votes = (props) => {
             thumb_down
         </i> :
         <i
-          onClick={props.downvoteFunction}
+          onClick={
+            localStorageUser ?
+            props.downvoteFunction :
+            ''
+          }
           className='material-icons'>
             thumb_down
         </i>

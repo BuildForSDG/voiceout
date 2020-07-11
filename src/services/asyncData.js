@@ -8,3 +8,4 @@ export const asyncLocalStorage = {
 		return JSON.parse(localStorage.getItem(key));
 	}
 }
+
