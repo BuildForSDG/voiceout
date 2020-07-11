@@ -173,18 +173,15 @@ class ReportDetails extends Component {
 	}
 	
 	render() {
-		console.log(this.state.returnedComments);
 		//const oneReport = this.props.oneReport || this.state.getSingleReport;
 		let oneReport;
 		const data = JSON.parse(localStorage.getItem('response'));
-		const localStorageUser = data && data.user ? data.user : '';
 		if(data && !data.hasOwnProperty('user') ) {
 			oneReport = this.props.oneReport.id === this.props.match.params.id ?
 									this.props.oneReport :
 									this.state.getSingleReport
 		}
 		oneReport = this.state.getSingleReport;
-		console.log(oneReport);
 		if(oneReport && oneReport.id == this.props.match.params.id){
 			const date = dateFromData(oneReport);
 			return (
