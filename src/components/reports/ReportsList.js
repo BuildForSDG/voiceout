@@ -42,48 +42,17 @@ class ReportsList extends Component {
 		}
 		return comparison;
 	}
-	//--------------------------------------//
-	//these functions were create so that one function can execute after the other.
-	sortByVotesCallFunction = () => {
-		const returnedReports = this.props.userReports.userReports;
-		console.log(returnedReports)
-		returnedReports.data.sort((a, b) => {
-			return (b.upvoted.length - a.upvoted.length)
-		})
-		return this.setItemSortFunction(returnedReports);
-	}
-	sortByDateCallFunction = () => {
-		const returnedReports = this.props.userReports.userReports;
-		returnedReports.data.sort(this.compareSort);
-		return this.setItemSortFunction(returnedReports);
-	}
-	setItemSortFunction = (param) => {
-		asyncLocalStorage.setItem('sorts', param);
-		return this.getItemSortFunction();
-	}
-	getItemSortFunction = () => {
-		return asyncLocalStorage.getItem('sorts');
-	}
-
-	//--------------------------------------------//
 	sortByDate = () => {
-		let res = this.sortByDateCallFunction()
 		this.setState({
 			sortByDate: true,
 			sortByVotes: false,
-			fromStorage: res
 		})
   }
   sortByVotes = () => {
-		let res = this.sortByVotesCallFunction()
 		this.setState({
 			sortByDate: false,
 			sortByVotes: true,
-			fromStorage: res
 		})
-		setTimeout(() => {
-			console.log(this.state.fromStorage)
-		}, 10000)
   }
 	render() {
 		if (this.state.canRedirect) {return <Redirect to='/' />}
@@ -97,16 +66,13 @@ class ReportsList extends Component {
 		if(this.state.sortByDate){
 			reports4rmLocal.data.sort(this.compareSort);
 			localStorage.setItem('sorts', JSON.stringify(reports4rmLocal))
-			//asyncLocalStorage.setItem('sorts', reports4rmLocal);
 		}
 		if(this.state.sortByVotes){
 			reports4rmLocal.data.sort((a, b) => {
 				return (b.upvoted.length - a.upvoted.length)
 			})
 			localStorage.setItem('sorts', JSON.stringify(reports4rmLocal))
-			//asyncLocalStorage.setItem('sorts', reports4rmLocal);
 		}
-		console.log(this.state.fromStorage);
 		return (
 			<div>
 				<div className=' btn-group-small' >
