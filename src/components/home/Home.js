@@ -174,7 +174,9 @@ class Home extends Component {
 						</label>
 						<div class='sector-flex-container'>
 							<div class='sector-content'>
-								<input type='radio' 
+								<input 
+									id='all'
+									type='radio' 
 									name='sector_id'
 									onChange={this.handleCheckbox} 
 									value='' 
@@ -187,7 +189,9 @@ class Home extends Component {
 								this.state.sectorFromBackEnd.map((data, i) => {
 									return (
 										<div key={i} class='sector-content'>
-											<input type='radio' 
+											<input 
+												id={data.name}
+												type='radio' 
 												name='sector_id'
 												onChange={this.handleCheckbox} 
 												value={data.id} 
