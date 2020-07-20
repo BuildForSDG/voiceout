@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+body{
+  font-family: 'Poppins', sans-serif !important;
+  color: #777 !important;
+}
+.links {
+  color: #555 !important;
+  font-size: 1.3rem;
+  padding-left: 2rem;
+  text-decoration: none !important;
+}
+.nav-header {
+  background-color: #fff;
+  position: fixed;
+  width: 100%;
+  border-bottom: 1px solid #888;
+}
+.color-nav{
+  background-color: transparent !important;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.brandName{
+  font-size: 1.7rem;
+  padding-left: 0em;
+}
+
+@media only screen and (max-width: 765px) {
+  .links{
+    font-size: 1rem;
+  }
+}
