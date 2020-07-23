@@ -10,7 +10,8 @@ class AllReports extends Component {
   constructor(props){
     super(props);
     this.state = {
-      loading: true
+      loading: true,
+      pageStatus: 'allReports',
     }
   }
 
@@ -50,7 +51,9 @@ class AllReports extends Component {
           <div className='container text-center searched-reports-div'>
             <h1>All Reports</h1>
             <div >
-              <ReportsList />
+              <ReportsList 
+                pageStatus={this.state.pageStatus}
+              />
             </div>
           </div>
         </div>
