@@ -60,25 +60,25 @@ class ReportsList extends Component {
 		//call the fuction on it.
 		const { userReports: {userReports} } = this.props;
 		let returnedReports = userReports;
-		let reports4rmLocal = localStorage.getItem('sorts') ?
-													JSON.parse(localStorage.getItem('sorts')) :
+		let reports4rmLocal = localStorage.getItem(this.props.pageStatus) ?
+													JSON.parse(localStorage.getItem(this.props.pageStatus)) :
 													returnedReports;
 		if(this.state.sortByDate){
 			reports4rmLocal.data.sort(this.compareSort);
-			localStorage.setItem('sorts', JSON.stringify(reports4rmLocal))
+			localStorage.setItem(this.props.pageStatus, JSON.stringify(reports4rmLocal))
 		}
 		if(this.state.sortByVotes){
 			reports4rmLocal.data.sort((a, b) => {
 				return (b.upvoted.length - a.upvoted.length)
 			})
-			localStorage.setItem('sorts', JSON.stringify(reports4rmLocal))
+			localStorage.setItem(this.props.pageStatus, JSON.stringify(reports4rmLocal))
 		}
 		return (
 			<div>
-				<div className=' btn-group-small' >
+				<div className=' btn-group-small'>
 					<Button
 						className='btn-sm'
-						onClick={this.sortByDate} 
+						onClick={this.sortByDate}
 						style={{margin: '10px'}}
 					>
 						Sort By Date

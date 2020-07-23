@@ -80,7 +80,7 @@ export default class SharePost extends Component {
                   }
                 </p>
               </div>
-              <label for="sector">Select a Sector
+              <label for="sector">Select a Voice
 								<span className="required">*</span>
 							</label>
 							<div class='sector-flex-container'>

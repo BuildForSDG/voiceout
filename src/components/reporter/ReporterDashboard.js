@@ -23,7 +23,8 @@ class ReporterDashboard extends Component {
 			sectorFromBackEnd: '',
 			loading: false,
 			reports: '',
-			anonymous: false
+			anonymous: false,
+			pageStatus: 'sortDashboard',
 		}
 
 	}
@@ -168,7 +169,10 @@ class ReporterDashboard extends Component {
 					>My Reports</h3>
 					{/*pass in results from api calls as props to ReportsList comp*/}
 					{(!this.state.loading)
-						? <ReportsList anonymous={this.state.anonymous} /> : ''
+						? <ReportsList 
+								pageStatus={this.state.pageStatus}
+								anonymous={this.state.anonymous}
+							/> : ''
 					}
 					{
 						userReports.userReports && userReports.userReports.data.length == 0 ?

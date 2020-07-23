@@ -8,6 +8,9 @@ class SearchedReports extends Component {
   constructor(props){
     super(props);
 
+    this.state = {
+      pageStatus: 'searchPage',
+    }
   }
 
   componentDidMount(){
@@ -27,7 +30,9 @@ class SearchedReports extends Component {
               }
             </h1>
             <div >
-              <ReportsList/>
+              <ReportsList 
+                pageStatus={this.state.pageStatus}
+              />
               <h3>
                 {
                   (userReportsState.userReports.data.length === 0) ? 
